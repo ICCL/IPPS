@@ -1,4 +1,9 @@
-RewriteEngine on
-RewriteBase /
+RewriteEngine On
+RewriteBase /ipps
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^.*(.css|.js|.gif|.png|.jpg|.jpeg)$
+
 RewriteCond $1 !^(index\.php|statics|robots\.txt|$)
 RewriteRule ^(.*)$ index.php/$1 [L,QSA]
