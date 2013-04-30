@@ -17,7 +17,7 @@ class Parame extends CI_Model {
         if(preg_match('/backend/', uri_string())) {
             $this->InterfaceStatus = 0;
             $this->lang->load('backend','zh-TW');
-            $this->loadBackendNav();
+            //$this->loadBackendNav();
         } else {
             if(strlen(uri_string()) != 0) {
                 $this->InterfaceStatus = 1;
@@ -39,11 +39,14 @@ class Parame extends CI_Model {
         /**     Under code follow $nav_page     **/
 
         $url = preg_split('/\//', uri_string());
+        if($this->InterfaceStatus == 0 )array_shift($url);
         $url_count = count($url);
 
-        $this->loadlang($url[0], strlen($url[0]));
+        if($url_count != 0) {
+            $this->loadlang($url);
+            $this->parames['js']        = $this->loadJS($url[0]);
+        }
         $this->parames['ArticlePage']   = $this->loadArticle($url, $url_count);
-        $this->parames['js']            = $this->loadJS($url[0]);
     }
 
     private function loadBackendNav() {
@@ -59,13 +62,13 @@ class Parame extends CI_Model {
     }
 
     /**     load different page lagnuage    **/
-    public function loadlang($url, $count) {
-        switch($count) {
+    public function loadlang($url) {
+        switch(count($url)) {
             case 0:
-                $this->lang->load('index', 'zh-TW');
+                //$this->lang->load('index', 'zh-TW');
                 break;
             default:
-                $this->lang->load($url, 'zh-TW');
+                $this->lang->load($url[0], 'zh-TW');
                 break;
         }
 
@@ -74,10 +77,12 @@ class Parame extends CI_Model {
     /**     load different Article  **/
     public function loadArticle($url, $count) {
         switch($count) {
-            case 1: 
-                return $url[0].'/index.php';
-            default:
-                return $url[0].'/'.$url[1].'.php';
+        case 0:
+            return 'index.php';
+        case 1:
+            return $url[0].'/index.php';
+        default:
+            return $url[0].'/'.$url[1].'.php';
         }
     }
 
