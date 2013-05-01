@@ -9,8 +9,10 @@ body .right {text-align: right;}
 table .date{width: 150px;}
 table .item{font-size:16pt;}
 
+div.footer a{color:#444;}
 div.footer div.span2{width:26px;}
 div.footer img{width: 24px;height:24px;}
+
 /* Custom container */
 .container-narrow {
     margin: 0 auto;
