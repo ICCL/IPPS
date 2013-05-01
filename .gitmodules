@@ -1,3 +1,6 @@
 [submodule "web/statics/lib/bootstrap"]
 	path = web/statics/lib/bootstrap
 	url = git@github.com:jasny/bootstrap.git
+[submodule "web/statics/lib/Chart"]
+	path = web/statics/lib/Chart
+	url = https://github.com/nnnick/Chart.js.git
