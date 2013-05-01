@@ -9,11 +9,15 @@ class Api extends CI_Controller {
         $this->load->model('db/temperature');
     }
 
-    public function index($temp, $hum, $soil, $light) {
-        $this->temperature->Add($temp);
-        $this->humidity->Add($hum);
-        $this->soil->Add($soil);
-        $this->light->Add($light);
+    public function index($hum='', $light='', $soil='', $temp='') {
+        if(!empty($hum) && !empty($light) && !empty($soil) && !empty($temp)) {
+            $this->temperature->Add($temp);
+            $this->humidity->Add($hum);
+            $this->soil->Add($soil);
+            $this->light->Add($light);
+        } else {
+            show_404();
+        }
     }
 
     public function Humidity($data) {
