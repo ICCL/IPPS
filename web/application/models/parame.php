@@ -8,7 +8,7 @@ class Parame extends CI_Model {
         /**     load Session    **/
         $this->load->library('Session');
         $this->UserInfo = $this->session->get('UserInfo');
-        $this->verifyLogin();
+        //$this->verifyLogin();
 
         /**     load basic lagnuage         **/
         $this->lang->load('basic','zh-TW');
@@ -71,7 +71,6 @@ class Parame extends CI_Model {
                 $this->lang->load($url[0], 'zh-TW');
                 break;
         }
-
     }
 
     /**     load different Article  **/
@@ -89,7 +88,7 @@ class Parame extends CI_Model {
     /**     load different JS   **/
     private function loadJS($fileName) {
         $result = '';
-        $dir = "statics/js/"; 
+        $dir = "statics/js/";
         switch($this->InterfaceStatus) {
             case 0:
                 $dir .= 'backend/';
@@ -100,17 +99,16 @@ class Parame extends CI_Model {
         }
 
         // Open a known directory, and proceed to read its contents 
-        if (is_dir($dir)) { 
-            if ($dh = opendir($dir)) { 
-
+        if (is_dir($dir)) {
+            if ($dh = opendir($dir)) {
                 while (($file = readdir($dh)) !== false) { 
-                    if ($file!="." && $file!=".." && $file == $fileName.'.js') { 
+                    if ($file!="." && $file!=".." && $file == $fileName.'.js') {
                         $result = $fileName.'.js';
                         break;
-                        // echo "<a href=file/".$file.">".$file."</a><br>"; 
+                        // echo "<a href=file/".$file.">".$file."</a><br>";
                     }
                 }
-                closedir($dh); 
+                closedir($dh);
             }
         }
         if($result != '')
