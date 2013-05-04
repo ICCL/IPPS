@@ -1,16 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Index extends CI_Controller {
-
-	public function __construct() {
+    private $parames;
+    public function __construct() {
         parent::__construct();
-    }	
-	
-	public function index() {
-		$parames = array();
-		$this->load->view('index', $parames);
-	}
-}
+        $this->load->model('parame');
+        $this->parames = $this->parame->getParams();
+    }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+    public function index() {
+        $this->load->view('index', $this->parames);
+    }
+}
