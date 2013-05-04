@@ -16,6 +16,7 @@ class Safetys extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->get($this->tab)->result()[0];
     }
+
     public function Add($value) {
         $data = array('value'=> $value);
         $this->db->insert($this->tab, $data);
