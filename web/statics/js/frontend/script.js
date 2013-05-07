@@ -5,8 +5,6 @@ function drawChart() {
     var time = 5000;
     var Run, Title;
 
-    Title = 'Humidity';
-    //draw();
     $('ul li a').on('click', function() {
         destroy();
         Title = getTitle($(this).attr('href'));
@@ -26,12 +24,13 @@ function drawChart() {
     }
 
     function draw() {
-      var chartTitle = ['Date', Title];
+      var chartTitle = ['Date', Title, 'Safety'];
       var chartData = new Array(chartTitle);
       $.getJSON('/ipps/'+ Title +'s/json/',{})
-      .done(function( data ) {
-        $.each( data, function( i, item ) {
-          chartData.push([item['create_at'], parseInt(item['value'])]);
+      .done(function( response ) {
+        var safety = response['safety']['value'];
+        $.each( response['data'], function( i, item ) {
+          chartData.push([item['create_at'], parseInt(item['value']), parseInt(safety)]);
         });
         var data = google.visualization.arrayToDataTable(chartData);
         var options = {
