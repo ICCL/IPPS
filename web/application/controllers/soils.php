@@ -3,13 +3,17 @@
 class Soils extends CI_Controller {
     public function __construct() {
         parent::__construct();
+        $this->load->model('db/soil');
+        $this->load->model('db/safetys');
     }
 
     public function json($limit='') {
         if(empty($limit)) $limit = 100;
-        $this->load->model('db/soil');
-        $result = $this->soil->Select($limit);
-        if($result->num_rows() > 0)
-            echo json_encode($result->result());
+        $soil = $this->soil->Select($limit);
+        if($soil->num_rows() > 0) $soil = $soil->result();
+
+        $safetys = $this->safetys->SWhere(3);
+        $result  = array('safety'=> $safetys, 'data'=> $soil );
+        echo json_encode($result);
     }
 }
