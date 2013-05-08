@@ -7,6 +7,7 @@ class Api extends CI_Controller {
         $this->load->model('db/light');
         $this->load->model('db/soil');
         $this->load->model('db/temperature');
+        $this->load->model('db/equipment');
     }
 
     public function index($hum='', $light='', $soil='', $temp='') {
@@ -17,6 +18,12 @@ class Api extends CI_Controller {
             $this->light->Add($light);
         } else {
             show_404();
+        }
+    }
+
+    public function equipment($id='') {
+        if(!empty($id)) {
+            $this->equipment->setStatus($id);
         }
     }
 
