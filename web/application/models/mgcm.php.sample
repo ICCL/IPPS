@@ -14,7 +14,7 @@ class Mgcm extends CI_Model {
         $this->load->model('db/soil');
         $this->load->model('db/temperature');
 
-        $this->GoogleKey = "";
+        $this->GoogleKey = "your_google_key";
 
         $this->init();
     }
