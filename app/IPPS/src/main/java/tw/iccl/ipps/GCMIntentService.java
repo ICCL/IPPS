@@ -2,6 +2,8 @@ package tw.iccl.ipps;
 
 import static tw.iccl.config.config.SENDER_ID;
 import static tw.iccl.config.config.EXTRA_MESSAGE;
+import static tw.iccl.pull.PullService.BR_GCM;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -13,7 +15,7 @@ import com.google.android.gcm.GCMBaseIntentService;
  */
 public class GCMIntentService extends GCMBaseIntentService {
     public final static boolean D = true;
-    public final static String Tag = "GCMIntentService";
+    public final static String TAG = "GCMIntentService";
 
     public GCMIntentService() {
         super(SENDER_ID);
@@ -27,7 +29,10 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected void onMessage(Context context, Intent intent) {
         String msg = intent.getStringExtra(EXTRA_MESSAGE);
-        if(D) Log.e(TAG, " -- Msg -- " + msg);
+//        if(D) Log.e(TAG, " -- Msg -- " + msg);
+        Intent mIntent = new Intent(BR_GCM);
+        mIntent.putExtra("msg", msg);
+        sendBroadcast(mIntent);
     }
 
     @Override

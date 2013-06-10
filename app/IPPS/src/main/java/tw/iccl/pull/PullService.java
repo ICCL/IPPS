@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -19,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
 
 import static tw.iccl.config.config.Url;
 import static tw.iccl.view.Sensor.BR_SENSORDATA;
@@ -34,7 +31,7 @@ public class PullService {
 
     private Context mContext;
 
-    private List<NameValuePair> mParames;
+    public static final String BR_GCM = "RequestGCM";
 
     private int KIND = 0;
     public final static int GET_ALL = 1;
@@ -54,8 +51,19 @@ public class PullService {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals("RequestServerAll")) {
-
+            if (action.equals(BR_GCM)) {
+                String result = intent.getStringExtra("msg");
+                Intent mIntent = new Intent(BR_SENSORDATA);
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+                    for(int i=0;i<jsonArray.length();i++) {
+                        mIntent.putExtra("Kind", i+2);
+                        mIntent.putExtra("result", GetVal(jsonArray.getJSONObject(i).toString()));
+                        mContext.sendBroadcast(mIntent);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
     };
@@ -69,7 +77,7 @@ public class PullService {
     private void EnableReceiver() {
         // TODO Auto-generated method stub
         IntentFilter mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction("PullAllData");
+        mIntentFilter.addAction(BR_GCM);
 
         mContext.registerReceiver(mRequestServerReceiver, mIntentFilter);
     }
@@ -167,7 +175,7 @@ public class PullService {
                 HttpResponse mHttpResponse = new DefaultHttpClient().execute(httpGet);
                 if(mHttpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                     result = EntityUtils.toString(mHttpResponse.getEntity());
-                    if(D) Log.e(TAG, "result " + result);
+//                    if(D) Log.e(TAG, "result " + result);
                     sendMessage();
                 }
             } catch (IOException e) {
