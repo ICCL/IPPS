@@ -16,6 +16,9 @@ class Api extends CI_Controller {
             $this->humidity->Add($hum);
             $this->soil->Add($soil);
             $this->light->Add($light);
+
+            /* Send Data to mobile use GCM */
+            $this->load->model('mgcm');
         } else {
             show_404();
         }
