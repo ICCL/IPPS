@@ -15,7 +15,7 @@
         <div id="chartSoil" class="Chart"></div>
     </div>
     <div class="tab-pane fade text-center" id="Temperature">
-        <h1>Temprature</h1>
+        <h1>Temperature</h1>
         <div id="chartTemperature" class="Chart"></div>
     </div>
 </div>
