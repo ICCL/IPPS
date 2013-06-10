@@ -16,4 +16,10 @@ class Lights extends CI_Controller {
         $result  = array('safety'=> $safetys, 'data'=> $light );
         echo json_encode($result);
     }
+
+    public function chart($limit='') {
+        $this->load->helper('url');
+        $this->parames['ArticlePage'] = 'light';
+        $this->load->view('chart', $this->parames);
+    }
 }

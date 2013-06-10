@@ -16,4 +16,10 @@ class Soils extends CI_Controller {
         $result  = array('safety'=> $safetys, 'data'=> $soil );
         echo json_encode($result);
     }
+
+    public function chart($limit='') {
+        $this->load->helper('url');
+        $this->parames['ArticlePage'] = 'soil';
+        $this->load->view('chart', $this->parames);
+    }
 }

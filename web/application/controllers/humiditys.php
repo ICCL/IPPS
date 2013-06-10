@@ -16,4 +16,10 @@ class Humiditys extends CI_Controller {
         $result  = array('safety'=> $safetys, 'data'=> $humidity );
         echo json_encode($result);
     }
+
+    public function chart($limit='') {
+        $this->load->helper('url');
+        $this->parames['ArticlePage'] = 'humidity';
+        $this->load->view('chart', $this->parames);
+    }
 }
