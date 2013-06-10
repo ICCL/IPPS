@@ -9,8 +9,11 @@ class Humidity extends CI_Model {
     }
 
     public function Select($limit) {
-        $this->db->limit($limit);
-        return $this->db->get($this->tab);
+        $query = "SELECT TBL.* ".
+                    "FROM (SELECT * FROM ". $this->tab ." Order by create_at DESC limit $limit) as TBL ".
+                    "Order by TBL.id ASC ".
+                    "Limit $limit";
+        return $this->db->query($query);
     }
 
     public function Add($value) {
