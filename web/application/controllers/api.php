@@ -17,6 +17,10 @@ class Api extends CI_Controller {
             $this->soil->Add($soil);
             $this->light->Add($light);
 
+            /* call nodejs update front-end chart update */
+            $ch = curl_init('http://192.168.10.103:8808/chart_update');
+            curl_exec($ch);
+
             /* Send Data to mobile use GCM */
             $this->load->model('mgcm');
         } else {
