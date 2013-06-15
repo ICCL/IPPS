@@ -116,16 +116,16 @@ public final class R {
 		public static final int abs__split_action_bar_is_narrow = 0x7f040005;
 	}
 	public static final class color {
-		public static final int abs__background_holo_dark = 0x7f050000;
-		public static final int abs__background_holo_light = 0x7f050001;
-		public static final int abs__bright_foreground_disabled_holo_dark = 0x7f050002;
-		public static final int abs__bright_foreground_disabled_holo_light = 0x7f050003;
-		public static final int abs__bright_foreground_holo_dark = 0x7f050004;
-		public static final int abs__bright_foreground_holo_light = 0x7f050005;
-		public static final int abs__primary_text_disable_only_holo_dark = 0x7f050006;
-		public static final int abs__primary_text_disable_only_holo_light = 0x7f050007;
-		public static final int abs__primary_text_holo_dark = 0x7f050008;
-		public static final int abs__primary_text_holo_light = 0x7f050009;
+		public static final int abs__background_holo_dark = 0x7f050003;
+		public static final int abs__background_holo_light = 0x7f050004;
+		public static final int abs__bright_foreground_disabled_holo_dark = 0x7f050005;
+		public static final int abs__bright_foreground_disabled_holo_light = 0x7f050006;
+		public static final int abs__bright_foreground_holo_dark = 0x7f050007;
+		public static final int abs__bright_foreground_holo_light = 0x7f050008;
+		public static final int abs__primary_text_disable_only_holo_dark = 0x7f050009;
+		public static final int abs__primary_text_disable_only_holo_light = 0x7f05000a;
+		public static final int abs__primary_text_holo_dark = 0x7f05000b;
+		public static final int abs__primary_text_holo_light = 0x7f05000c;
 	}
 	public static final class dimen {
 		public static final int abs__action_bar_default_height = 0x7f070000;

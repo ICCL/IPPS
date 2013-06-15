@@ -7,6 +7,7 @@ import android.view.Menu;
 import com.actionbarsherlock.app.SherlockActivity;
 
 import tw.iccl.gcm.GCM;
+import tw.iccl.view.Device;
 import tw.iccl.view.Sensor;
 
 public class MainActivity extends SherlockActivity {
@@ -15,6 +16,7 @@ public class MainActivity extends SherlockActivity {
 
     private GCM mGCM;
     private Sensor mSensor;
+    private Device mDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MainActivity extends SherlockActivity {
         super.onResume();
 
         mSensor = new Sensor(this);
+        mDevice = new Device(this);
     }
 
     @Override

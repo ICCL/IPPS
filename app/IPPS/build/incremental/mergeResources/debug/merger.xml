@@ -4500,6 +4500,16 @@ true
                 qualifiers=""
                 type="menu" />
             <file
+                path="/Users/git/IPPS/app/IPPS/src/main/res/values/color.xml"
+                qualifiers="" >
+                <color name="DeviceLayoutBG" >#B8CEDA
+                </color>
+                <color name="DeviceOff" >#95A5A6
+                </color>
+                <color name="DeviceOn" >#2ECC71
+                </color>
+            </file>
+            <file
                 path="/Users/git/IPPS/app/IPPS/src/main/res/values/dimens.xml"
                 qualifiers="" >
                 <dimen name="activity_horizontal_margin" >16dp

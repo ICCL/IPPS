@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="DeviceLayoutBG">#B8CEDA</color>
+    <color name="DeviceOn">#2ECC71</color>
+    <color name="DeviceOff">#95A5A6</color>
+</resources>

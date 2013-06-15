@@ -681,16 +681,19 @@ containing a value of this type.
         public static final int abs__split_action_bar_is_narrow=0x7f040005;
     }
     public static final class color {
-        public static final int abs__background_holo_dark=0x7f050000;
-        public static final int abs__background_holo_light=0x7f050001;
-        public static final int abs__bright_foreground_disabled_holo_dark=0x7f050002;
-        public static final int abs__bright_foreground_disabled_holo_light=0x7f050003;
-        public static final int abs__bright_foreground_holo_dark=0x7f050004;
-        public static final int abs__bright_foreground_holo_light=0x7f050005;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f050006;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f050007;
-        public static final int abs__primary_text_holo_dark=0x7f050008;
-        public static final int abs__primary_text_holo_light=0x7f050009;
+        public static final int DeviceLayoutBG=0x7f050000;
+        public static final int DeviceOff=0x7f050001;
+        public static final int DeviceOn=0x7f050002;
+        public static final int abs__background_holo_dark=0x7f050003;
+        public static final int abs__background_holo_light=0x7f050004;
+        public static final int abs__bright_foreground_disabled_holo_dark=0x7f050005;
+        public static final int abs__bright_foreground_disabled_holo_light=0x7f050006;
+        public static final int abs__bright_foreground_holo_dark=0x7f050007;
+        public static final int abs__bright_foreground_holo_light=0x7f050008;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f050009;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f05000a;
+        public static final int abs__primary_text_holo_dark=0x7f05000b;
+        public static final int abs__primary_text_holo_light=0x7f05000c;
     }
     public static final class dimen {
         public static final int abs__action_bar_default_height=0x7f070000;
@@ -844,10 +847,10 @@ containing a value of this type.
         public static final int temperature=0x7f020081;
     }
     public static final class id {
-        public static final int HumName=0x7f060036;
-        public static final int LightName=0x7f06003a;
-        public static final int SoilName=0x7f06003d;
-        public static final int TempName=0x7f060042;
+        public static final int HumName=0x7f060038;
+        public static final int LightName=0x7f06003e;
+        public static final int SoilName=0x7f060041;
+        public static final int TempName=0x7f06004a;
         public static final int abs__action_bar=0x7f060020;
         public static final int abs__action_bar_container=0x7f06001f;
         public static final int abs__action_bar_subtitle=0x7f060011;
@@ -887,31 +890,39 @@ containing a value of this type.
         public static final int abs__textButton=0x7f060013;
         public static final int abs__title=0x7f06001b;
         public static final int abs__up=0x7f06000f;
-        public static final int action_settings=0x7f060044;
+        public static final int action_settings=0x7f06004c;
         public static final int chartView=0x7f060032;
         public static final int disableHome=0x7f060008;
         public static final int edit_query=0x7f060026;
-        public static final int fan=0x7f060033;
+        public static final int fan_img=0x7f060034;
+        public static final int fan_line=0x7f060035;
         public static final int homeAsUp=0x7f060005;
-        public static final int imageButton=0x7f060035;
-        public static final int lamp=0x7f060038;
+        public static final int imageButton=0x7f060037;
+        public static final int lamp_img=0x7f06003b;
+        public static final int lamp_line=0x7f06003c;
+        public static final int layout_fan=0x7f060033;
+        public static final int layout_lamp=0x7f06003a;
+        public static final int layout_sprinkler=0x7f060043;
+        public static final int layout_status=0x7f060046;
         public static final int listMode=0x7f060001;
         public static final int normal=0x7f060000;
-        public static final int sensor_hum=0x7f060034;
-        public static final int sensor_light=0x7f060039;
-        public static final int sensor_soil=0x7f06003c;
-        public static final int sensor_temp=0x7f060041;
+        public static final int sensor_hum=0x7f060036;
+        public static final int sensor_light=0x7f06003d;
+        public static final int sensor_soil=0x7f060040;
+        public static final int sensor_temp=0x7f060049;
         public static final int showCustom=0x7f060007;
         public static final int showHome=0x7f060004;
         public static final int showTitle=0x7f060006;
-        public static final int sprinkler=0x7f06003f;
-        public static final int status=0x7f060040;
+        public static final int sprinkler_img=0x7f060044;
+        public static final int sprinkler_line=0x7f060045;
+        public static final int status_img=0x7f060047;
+        public static final int status_line=0x7f060048;
         public static final int tabMode=0x7f060002;
         public static final int useLogo=0x7f060003;
-        public static final int val_hum=0x7f060037;
-        public static final int val_light=0x7f06003b;
-        public static final int val_soil=0x7f06003e;
-        public static final int val_temp=0x7f060043;
+        public static final int val_hum=0x7f060039;
+        public static final int val_light=0x7f06003f;
+        public static final int val_soil=0x7f060042;
+        public static final int val_temp=0x7f06004b;
         public static final int wrap_content=0x7f060009;
     }
     public static final class integer {

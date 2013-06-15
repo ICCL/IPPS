@@ -4,11 +4,12 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#B8CEDA">
+              android:id="@+id/layout_lamp"
+              android:background="@color/DeviceLayoutBG">
     <ImageButton
             style="@style/controller"
             android:src="@drawable/lamp_off"
-            android:id="@+id/lamp"/>
+            android:id="@+id/lamp_img"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,8 +19,9 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="#95A5A6"
+            android:background="@color/DeviceOff"
             android:layout_gravity="center"
+            android:id="@+id/lamp_line"
             android:layout_margin="5dp">
     </LinearLayout>
 </LinearLayout>
