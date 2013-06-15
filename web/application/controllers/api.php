@@ -49,4 +49,9 @@ class Api extends CI_Controller {
     public function Temperature($data) {
         $this->temperature->Add($data);
     }
+
+    public function UpdateData() {
+        /* Send Data to mobile use GCM */
+        $this->load->model('mgcm');
+    }
 }
