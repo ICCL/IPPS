@@ -1,13 +1,14 @@
 #include <Ethernet.h>
 #include <SPI.h>
 #include <SHT1x.h>
+#include <stdlib.h>
 
   #define dataPin  6
   #define clockPin 7
   
   byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED}; // 乙太網路
   IPAddress ip(192, 168, 0, 30);                     // local IP
-  IPAddress remote(192, 168, 0, 130);                // remote IP
+  IPAddress remote(192, 168, 0, 131);                // remote IP
   EthernetServer Listen(80);                         // server
   EthernetClient client;                             // client
   
@@ -18,6 +19,14 @@
   float Temperature, Humidity;                       // 溫度、濕度
   int Soil, Light;                                   // 土壤, 光
   
+  float safe_Temperature, safe_Humidity;             // safety value
+  int safe_Soil, safe_Light;                         // saftey value
+  
+  static int Auto = 1;
+  static int Manually = 2;
+  int Status = Auto;
+  
+  String tempLight, tempFan, tempPump;
   int time = 0;
 
   void setup() {
@@ -35,11 +44,20 @@
     Listen.begin();
     Serial.print("server is at ");
     Serial.println(Ethernet.localIP());
+    
+    /* default safe value*/
+    safe_Temperature = 26;
+    safe_Humidity    = 69;
+    safe_Soil        = 19;
+    safe_Light       = 299;
+    Init_Safetys();
   }
   
   void loop() {
     int Send   = analogRead(A10);           // 光
     int Listen = analogRead(A11);           // 光
+    
+    Controller();
     
     if(Send < 10 ) {
       //EthernetSend();
@@ -49,30 +67,116 @@
      //EthernetListen();
     } 
     EthernetListen();
-    Serial.print("Send: ");
-    Serial.print(Send);
-    Serial.print("  Listen: ");
-    Serial.println(Listen);
-    delay(1000);
+    //Serial.print("Send: ");
+    //Serial.print(Send);
+    //Serial.print("  Listen: ");
+    //Serial.println(Listen);
+    delay(500);
   }
   
   void EthernetSend() {
+    if(time == 20) { 
+      Deliver();
+      time = 0;
+    }
+    time++;
+  }
+  
+  void Init_Safetys() {
+    if (client.connect(remote, 80)) {
+      Serial.println("connected");
+      client.print("GET /ipps/api/safetys/");
+      client.println(" HTTP/1.0");
+      client.println();
+
+      client.stop();
+      client.flush();
+      Serial.println("Update Safetys!!");
+    } else {
+      Serial.println("connection failed");
+    }
+  }
+  
+  void Controller() {
     Temperature = sht1x.readTemperatureC(); // 溫度傳感器
     Humidity    = sht1x.readHumidity();     // 濕度傳感器
     int loo     = analogRead(A1);
     Soil        = (1000-(loo-23))/10;       // 土壤
     Light       = analogRead(A0);           // 光
     
-    if(time == 5) { 
-      Deliver();
-      Show();
-      time = 0;
+    Show();
+    if(Status == Auto) {
+        String Sensor="", Status="";
+        if(Light < safe_Light) {
+//          digitalWrite(9, HIGH);
+          Sensor = "Light";
+          Status = "on";
+        } else {
+//          digitalWrite(9, LOW); 
+          Sensor = "Light";
+          Status = "off";
+        }
+        if( tempLight != Sensor+Status) {
+          tempLight = Sensor+Status;
+          SetController(Sensor, Status);
+        } 
+        
+        if(Temperature>safe_Temperature || Humidity>safe_Humidity) {
+          //digitalWrite(2, HIGH);
+          Sensor = "Fan";
+          Status = "on";
+        } else {
+//          digitalWrite(2, LOW);
+          Sensor = "Fan";
+          Status = "off";
+        }
+        if( tempFan != Sensor+Status) {
+          tempFan = Sensor+Status;
+          SetController(Sensor, Status);
+        }
+        
+        if(Soil < safe_Soil) {
+//          digitalWrite(3, HIGH);
+//          delay(5000);
+//          digitalWrite(3, LOW);
+//          delay(3000);
+          Sensor = "Pump";
+          Status = "on";
+        } else {
+//          digitalWrite(3, LOW);
+          Sensor = "Pump";
+          Status = "off";
+        }
+        if( tempPump != Sensor+Status) {
+          tempPump = Sensor+Status;
+          SetController(Sensor, Status);
+        }
     }
-    time++;
+  }
+  
+  void SetController(String Sensor, String Status) {
+    Serial.print("Sensor: ");
+    Serial.print(Sensor);
+    Serial.print(" ,Status: ");
+    Serial.println(Status);
+    
+    if (client.connect(remote, 80)) {
+      client.print("GET /ipps/api/equipment/");
+      client.print(Sensor);
+      client.print("/");
+      client.print(Status);
+      client.print("/");
+      client.println(" HTTP/1.0");
+      client.println();
+
+      client.stop();
+      client.flush();
+    } else {
+      Serial.println("connection failed");
+    }
   }
   
   void Deliver() {
-    Serial.println("connecting...");
     if (client.connect(remote, 80)) {
       Serial.println("connected");
       client.print("GET /ipps/api/index/");
@@ -96,24 +200,41 @@
   }
 
   void Show() {
-    Serial.print("Light: ");
-    Serial.println(Light);
-    Serial.print("Temperature: ");  // 溫度的值
-    Serial.print(Temperature);      // 溫度的值
-    Serial.print(",");
+    Serial.println("-----------------------------------------");
+    Serial.println("|                safety                 |");
+    Serial.print("| Temperature: ");  // 溫度的值
+    Serial.print(safe_Temperature); // 溫度的值
+    Serial.print(", ");
     Serial.print("Humidity: ");     // 濕度的值
-    Serial.println(Humidity);       // 濕度的值
+    Serial.println(safe_Humidity);  // 濕度的值
+    Serial.print("| Light: ");
+    Serial.print(safe_Light);
+    Serial.print(", ");
+    Serial.print("Soil: ");         // 土壤的值
+    Serial.print(safe_Soil);        // 土壤的值
+    Serial.println("%");
+    Serial.println("-----------------------------------------");
+    Serial.print("| Temperature: ");  // 溫度的值
+    Serial.print(Temperature);      // 溫度的值
+    Serial.print(", ");
+    Serial.print("Humidity: ");     // 濕度的值
+    Serial.println(Humidity);        // 濕度的值
+    Serial.print("| Light: ");
+    Serial.print(Light);
+    Serial.print(", ");
     Serial.print("Soil: ");         // 土壤的值
     Serial.print(Soil);             // 土壤的值
     Serial.println("%");
     Serial.println("=========================================");
+    Serial.println("");
+    Serial.println("");
   }
   
   void EthernetListen() {
     // Listen for incoming clients
     EthernetClient client = Listen.available();
     if (client) {
-      Serial.println("new client");
+//      Serial.println("new client");
       // an http request ends with a blank line
       boolean currentLineIsBlank = true;
       while (client.connected()) {
@@ -122,7 +243,7 @@
           Request += c;
           if (c == '\n' && currentLineIsBlank) {
             Control(Request);
-            Serial.println(Request);
+            //Serial.println(Request);
             Request = "";
             break;
           }
@@ -136,17 +257,26 @@
         }
       }
       client.stop();
-      Serial.println("client disonnected");
+      //Serial.println("client disonnected");
     }
   }
   
+  
+  /* network url control - http://IP/XXX */
   void Control(String Request) {
-    if(Request.indexOf("/Light=on") > -1) {
+    if(Request.indexOf("/safetys") > -1) {
+      String safetys = Request.substring(Request.indexOf("[")+1, Request.indexOf("]"));
+      safety_split(safetys);
+    } else if(Request.indexOf("/Status=Auto") > -1) {  
+      Status = Auto;
+    } else if(Request.indexOf("/Status=Manually") > -1) {  
+      Status = Manually;
+    } else if(Request.indexOf("/Light=on") > -1) {
       digitalWrite(9, HIGH);
     } else if(Request.indexOf("/Light=off") > -1) {
       digitalWrite(9, LOW);
     } else if(Request.indexOf("/Fan=on") > -1) {
-      digitalWrite(2, HIGH);
+      //digitalWrite(2, HIGH);
     } else if(Request.indexOf("/Fan=off") > -1) {
       digitalWrite(2, LOW);
     } else if(Request.indexOf("/Pump=on") > -1) {
@@ -158,3 +288,38 @@
       digitalWrite(3, LOW);
     }
   }
+  
+  /* https://www.inkling.com/read/arduino-cookbook-michael-margolis-2nd/chapter-2/recipe-2-7 */
+  void safety_split(String request) {
+    int i=0;
+    int commaPosition;
+    String value = "";
+    do {
+      commaPosition = request.indexOf(',');
+      if(commaPosition != -1) {
+        value = request.substring(0, commaPosition);
+        request = request.substring(commaPosition+1, request.length());
+      } else {  // here after the last comma is found
+        //Serial.println(request);  // if there is text after the last comma,
+        value = request;
+      }
+      if(value.length() > 0) {
+        switch(i) {
+          case 0:
+            safe_Humidity = value.toInt();
+            break;
+          case 1:
+            safe_Light = value.toInt();
+            break;
+          case 2:
+            safe_Soil = value.toInt();
+            break;
+          case 3:
+            safe_Temperature = value.toInt();
+            break;
+        } 
+      }
+      i++;
+    } while(commaPosition >=0);
+  }
+  
