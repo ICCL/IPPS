@@ -48,6 +48,15 @@
         <item name="android:paddingBottom">10dp</item>
     </style>
 
+    <style name="sensor_unit">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:paddingLeft">100dp</item>
+    </style>
+
     <style name="sensor_value">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

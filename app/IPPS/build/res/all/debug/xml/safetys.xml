@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/setting_safetys"
+                        android:summary="@string/setting_set_safetys">
+        <EditTextPreference
+                android:key="@string/temperature"
+                android:title="@string/temperature"/>
+        <EditTextPreference
+                android:key="@string/humidity"
+                android:title="@string/humidity"/>
+        <EditTextPreference
+                android:key="@string/light"
+                android:title="@string/light"/>
+        <EditTextPreference
+                android:key="@string/soil"
+                android:title="@string/soil"/>
+    </PreferenceCategory>
+</PreferenceScreen>

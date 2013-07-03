@@ -1,10 +1,12 @@
 package tw.iccl.view;
 
-import static tw.iccl.pull.PullService.GET_ALL;
-import static tw.iccl.pull.PullService.GET_HUMIDITY;
-import static tw.iccl.pull.PullService.GET_LIGHT;
-import static tw.iccl.pull.PullService.GET_SOIL;
-import static tw.iccl.pull.PullService.GET_TEMPERATURE;
+import static tw.iccl.pullpush.PullService.BR_Pull;
+import static tw.iccl.pullpush.PullService.GET_ALL;
+import static tw.iccl.pullpush.PullService.GET_HUMIDITY;
+import static tw.iccl.pullpush.PullService.GET_LIGHT;
+import static tw.iccl.pullpush.PullService.GET_SOIL;
+import static tw.iccl.pullpush.PullService.GET_TEMPERATURE;
+import static tw.iccl.pullpush.PullService.GET_EquipmentStatus;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -16,7 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import tw.iccl.ipps.R;
-import tw.iccl.pull.PullService;
+import tw.iccl.pullpush.PullService;
 
 /**
  * Created by Macintosh on 13/6/9.
@@ -24,10 +26,9 @@ import tw.iccl.pull.PullService;
 public class Sensor {
 
     public final static boolean D = true;
-    public final static String TAG = "MainActivity";
+    public final static String TAG = "Sensor";
 
     private Context mContext;
-    private PullService mPullServer;
 
     private RelativeLayout Temp, Hum, Light, Soil;
     private TextView  vHum, vLight, vSoil, vTemp;
@@ -46,7 +47,7 @@ public class Sensor {
             if(action.equals(BR_SENSORDATA)) {
                 int Kind = intent.getIntExtra("Kind", 0);
                 String val = intent.getStringExtra("result");
-                if(D) Log.e(TAG, "Kind " + Kind + " val: " + val);
+                if(D) Log.e(TAG, "val: "+ val);
                 switch(Kind) {
                     case GET_HUMIDITY:
                         vHum.setText(val);
@@ -67,9 +68,12 @@ public class Sensor {
 
     public Sensor(Context context) {
         this.mContext = context;
+        onReceiver();
 
         init_view();
-        onReceiver();
+
+        GetAll(GET_ALL, 1);
+        GetEquipmentStatus(GET_EquipmentStatus);
     }
 
     private void onReceiver() {
@@ -98,8 +102,19 @@ public class Sensor {
           vHum = (TextView) findViewById(R.id.val_hum);
         vLight = (TextView) findViewById(R.id.val_light);
          vSoil = (TextView) findViewById(R.id.val_soil);
+    }
 
-        getInitData();
+    private void GetAll(int Kind, int getCount) {
+        Intent mIntent = new Intent(BR_Pull);
+        mIntent.putExtra("Kind", Kind);
+        mIntent.putExtra("getCount", getCount);
+        mContext.sendBroadcast( mIntent );
+    }
+
+    private void GetEquipmentStatus(int Kind) {
+        Intent mIntent = new Intent(BR_Pull);
+        mIntent.putExtra("Kind", Kind);
+        mContext.sendBroadcast( mIntent );
     }
 
     private View.OnClickListener HumOnClick = new View.OnClickListener () {
@@ -134,13 +149,7 @@ public class Sensor {
         }
     };
 
-    private void getInitData() {
-        mPullServer = new PullService(mContext);
-        mPullServer.Pull(GET_ALL, 1);
-    }
-
-    public void DesableReceiver() {
+    public void DisableReceiver() {
         mContext.unregisterReceiver(mBroadcastReceiver);
-        mPullServer.DesableReceiver();
     }
 }

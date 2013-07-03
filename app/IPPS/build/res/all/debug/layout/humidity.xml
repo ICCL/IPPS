@@ -10,9 +10,16 @@
             android:src="@drawable/humidity"
             android:id="@+id/imageButton" />
     <TextView
+            android:layout_above="@+id/val_hum"
+            android:layout_gravity="center_horizontal|center_vertical"
+            style="@style/sensor_unit"
+            android:text="@string/hum_soilUnit"
+            android:id="@+id/unit_hum" />
+    <TextView
             android:layout_above="@+id/HumName"
             android:layout_gravity="center_horizontal|center_vertical"
             style="@style/sensor_value"
+            android:text="10"
             android:id="@+id/val_hum"/>
     <TextView
             style="@style/sensor_name"

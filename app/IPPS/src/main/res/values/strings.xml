@@ -23,4 +23,28 @@
     </string>
     <string name="temperature" >Temp.
     </string>
+    <string name="lightUnit" >lm
+    </string>
+    <string name="hum_soilUnit" >%
+    </string>
+    <string name="tempUnit" >℃
+    </string>
+    <string name="notification" >Notification
+    </string>
+    <string name="notification_default" >訊息:
+    </string>
+    <string name="notification_lamp" >給我陽光
+    </string>
+    <string name="notification_fan" >我好熱!!
+    </string>
+    <string name="notification_sprinkler" >我要喝水
+    </string>
+    <string name="enable" >enable
+    </string>
+    <string name="disable" >disable
+    </string>
+    <string name="setting_safetys" >Safetys
+    </string>
+    <string name="setting_set_safetys" >Setting Safetys
+    </string>
 </resources>

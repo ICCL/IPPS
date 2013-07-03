@@ -4495,8 +4495,8 @@ true
                 qualifiers=""
                 type="layout" />
             <file
-                name="main"
-                path="/Users/git/IPPS/app/IPPS/src/main/res/menu/main.xml"
+                name="main_menu"
+                path="/Users/git/IPPS/app/IPPS/src/main/res/menu/main_menu.xml"
                 qualifiers=""
                 type="menu" />
             <file
@@ -4520,27 +4520,51 @@ true
             <file
                 path="/Users/git/IPPS/app/IPPS/src/main/res/values/strings.xml"
                 qualifiers="" >
-                <string name="soil" >Soil
+                <string name="notification_sprinkler" >我要喝水
                 </string>
-                <string name="manual" >Manual
+                <string name="soil" >Soil
                 </string>
                 <string name="action_settings" >Settings
                 </string>
+                <string name="manual" >Manual
+                </string>
+                <string name="setting_set_safetys" >Setting Safetys
+                </string>
                 <string name="fan" >Fan
                 </string>
+                <string name="notification_lamp" >給我陽光
+                </string>
+                <string name="lamp" >Lamp
+                </string>
+                <string name="sprinkler" >Sprinkler
+                </string>
+                <string name="humidity" >Humidity
+                </string>
+                <string name="hum_soilUnit" >%
+                </string>
+                <string name="enable" >enable
+                </string>
+                <string name="tempUnit" >℃
+                </string>
+                <string name="setting_safetys" >Safetys
+                </string>
+                <string name="disable" >disable
+                </string>
                 <string name="light" >Light
+                </string>
+                <string name="notification_default" >訊息:
                 </string>
                 <string name="auto" >Auto
                 </string>
                 <string name="app_name" >IPPS
                 </string>
-                <string name="humidity" >Humidity
+                <string name="notification" >Notification
                 </string>
-                <string name="sprinkler" >Sprinkler
-                </string>
-                <string name="lamp" >Lamp
+                <string name="notification_fan" >我好熱!!
                 </string>
                 <string name="temperature" >Temp.
+                </string>
+                <string name="lightUnit" >lm
                 </string>
             </file>
             <file
@@ -4582,6 +4606,27 @@ true
                     </item>
                     <item name="android:layout_height">
 70dp
+                    </item>
+                </style>
+
+                <style name="sensor_unit" >
+                    <item name="android:layout_width">
+wrap_content
+                    </item>
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                    <item name="android:textColor">
+#ffffff
+                    </item>
+                    <item name="android:textSize">
+30dp
+                    </item>
+                    <item name="android:layout_centerHorizontal">
+true
+                    </item>
+                    <item name="android:paddingLeft">
+100dp
                     </item>
                 </style>
 
@@ -4687,6 +4732,16 @@ fitCenter
                     <!-- API 14 theme customizations can go here. -->
                 </style>
             </file>
+            <file
+                name="safetys"
+                path="/Users/git/IPPS/app/IPPS/src/main/res/xml/safetys.xml"
+                qualifiers=""
+                type="xml" />
+            <file
+                name="setting"
+                path="/Users/git/IPPS/app/IPPS/src/main/res/xml/setting.xml"
+                qualifiers=""
+                type="xml" />
         </source>
         <source path="/Users/git/IPPS/app/IPPS/build/res/rs/debug" />
     </dataSet>

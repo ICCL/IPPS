@@ -2,7 +2,7 @@ package tw.iccl.ipps;
 
 import static tw.iccl.config.config.SENDER_ID;
 import static tw.iccl.config.config.EXTRA_MESSAGE;
-import static tw.iccl.pull.PullService.BR_GCM;
+import static tw.iccl.pullpush.PullService.BR_GCM;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,20 +1,26 @@
 package tw.iccl.ipps;
 
+import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
+import android.util.Log;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
-import tw.iccl.gcm.GCM;
+import tw.iccl.option.Setting;
+import tw.iccl.service.BackgroundService;
 import tw.iccl.view.Device;
 import tw.iccl.view.Sensor;
 
+import static tw.iccl.service.BackgroundService.haveBackgroundService;
+
 public class MainActivity extends SherlockActivity {
     public final static boolean D = true;
-    public final static String Tag = "MainActivity";
+    public final static String TAG = "MainActivity";
 
-    private GCM mGCM;
     private Sensor mSensor;
     private Device mDevice;
 
@@ -28,6 +34,8 @@ public class MainActivity extends SherlockActivity {
     protected void onStart() {
         super.onStart();
         onReceiver();
+
+        cancelNotificationAll();
     }
 
     @Override
@@ -41,24 +49,38 @@ public class MainActivity extends SherlockActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unReceiver();
 
+        mSensor.DisableReceiver();
+        mDevice.DisableReceiver();
+    }
+
+    private void cancelNotificationAll() {
+        ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancelAll();
     }
 
     private void onReceiver() {
-        if(mGCM == null) mGCM = new GCM(this);
-    }
-
-    private void unReceiver() {
-        mGCM.Unregister();
-        mSensor.DesableReceiver();
+        if(haveBackgroundService) {
+            if(D) Log.e(TAG, "enalbe BGService");
+            Intent mIntent = new Intent(this, BackgroundService.class);
+            startService(mIntent);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
-    
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.settings:
+                startActivity(new Intent().setClass(this , Setting.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
