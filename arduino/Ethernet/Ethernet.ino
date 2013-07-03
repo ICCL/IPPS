@@ -26,8 +26,10 @@
   static int Manually = 2;
   int Status = Auto;
   
-  String tempLight, tempFan, tempPump;
+  String tempLamp, tempFan, tempSprinkler;
   int time = 0;
+  
+  
 
   void setup() {
     Serial.begin(9600);
@@ -51,6 +53,7 @@
     safe_Soil        = 19;
     safe_Light       = 299;
     Init_Safetys();
+    SetController("Status", "Auto");
   }
   
   void loop() {
@@ -107,49 +110,44 @@
     Show();
     if(Status == Auto) {
         String Sensor="", Status="";
+        
+        /**  Lamp **/
         if(Light < safe_Light) {
-//          digitalWrite(9, HIGH);
-          Sensor = "Light";
+          Sensor = "Lamp";
           Status = "on";
         } else {
-//          digitalWrite(9, LOW); 
-          Sensor = "Light";
+          Sensor = "Lamp";
           Status = "off";
         }
-        if( tempLight != Sensor+Status) {
-          tempLight = Sensor+Status;
+        if( tempLamp != Sensor+Status) {
           SetController(Sensor, Status);
-        } 
+          tempLamp = Sensor+Status;
+        }
         
+        /**  Fan **/
         if(Temperature>safe_Temperature || Humidity>safe_Humidity) {
-          //digitalWrite(2, HIGH);
           Sensor = "Fan";
           Status = "on";
         } else {
-//          digitalWrite(2, LOW);
           Sensor = "Fan";
           Status = "off";
         }
         if( tempFan != Sensor+Status) {
-          tempFan = Sensor+Status;
           SetController(Sensor, Status);
+          tempFan = Sensor+Status;
         }
         
+        /**  Sprinkler **/
         if(Soil < safe_Soil) {
-//          digitalWrite(3, HIGH);
-//          delay(5000);
-//          digitalWrite(3, LOW);
-//          delay(3000);
-          Sensor = "Pump";
+          Sensor = "Sprinkler";
           Status = "on";
         } else {
-//          digitalWrite(3, LOW);
-          Sensor = "Pump";
+          Sensor = "Sprinkler";
           Status = "off";
         }
-        if( tempPump != Sensor+Status) {
-          tempPump = Sensor+Status;
+        if( tempSprinkler != Sensor+Status) {
           SetController(Sensor, Status);
+          tempSprinkler = Sensor+Status;
         }
     }
   }
@@ -212,7 +210,9 @@
     Serial.print(", ");
     Serial.print("Soil: ");         // 土壤的值
     Serial.print(safe_Soil);        // 土壤的值
-    Serial.println("%");
+    Serial.print("% ");
+    Serial.print("Status: ");       
+    Serial.println(Status);           
     Serial.println("-----------------------------------------");
     Serial.print("| Temperature: ");  // 溫度的值
     Serial.print(Temperature);      // 溫度的值
@@ -264,6 +264,7 @@
   
   /* network url control - http://IP/XXX */
   void Control(String Request) {
+    
     if(Request.indexOf("/safetys") > -1) {
       String safetys = Request.substring(Request.indexOf("[")+1, Request.indexOf("]"));
       safety_split(safetys);
@@ -271,21 +272,28 @@
       Status = Auto;
     } else if(Request.indexOf("/Status=Manually") > -1) {  
       Status = Manually;
-    } else if(Request.indexOf("/Light=on") > -1) {
+    } else if(Request.indexOf("/Lamp=on") > -1) {
       digitalWrite(9, HIGH);
-    } else if(Request.indexOf("/Light=off") > -1) {
+      tempLamp = "Lampon";
+    } else if(Request.indexOf("/Lamp=off") > -1) {
       digitalWrite(9, LOW);
+      tempLamp = "Lampoff";
     } else if(Request.indexOf("/Fan=on") > -1) {
-      //digitalWrite(2, HIGH);
+      digitalWrite(2, HIGH);
+      tempFan = "Fanon";
     } else if(Request.indexOf("/Fan=off") > -1) {
       digitalWrite(2, LOW);
-    } else if(Request.indexOf("/Pump=on") > -1) {
+      tempFan = "Fanoff";
+    } else if(Request.indexOf("/Sprinkler=on") > -1) {
       digitalWrite(3, HIGH);
       delay(5000);
       digitalWrite(3, LOW);
       delay(3000);
-    } else if(Request.indexOf("/Pump=off") > -1) {
+      tempSprinkler = "Sprinkleron";
+      SetController("Sprinkler", "off");
+    } else if(Request.indexOf("/Sprinkler=off") > -1) {
       digitalWrite(3, LOW);
+      tempSprinkler = "Sprinkleroff";
     }
   }
   
