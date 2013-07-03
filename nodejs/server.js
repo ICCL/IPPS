@@ -11,10 +11,10 @@ console.log('Server running');
 
 //.on()為socket的接收端，預設的key值是connection
 io.sockets.on('connection', function (socket) {
+    console.log('socket start');
     app.get('/chart_update', function(req, res){
-        res.send('hello world');
+        res.send('');
         socket.broadcast.emit('update');
-        console.log('a');
     });
 
     console.log('start');
