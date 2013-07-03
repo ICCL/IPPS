@@ -4,11 +4,12 @@ function drawChart() {
   $(function() {
     var time = 5000, Run, RunStatus = false, Title;
 
-    var socket = io.connect('http://192.168.10.103:8808');
+    //var socket = io.connect('http://192.168.10.103:8808');
+    var socket = io.connect('http://192.168.0.131:8808');
     //.on()為socket的接收端，client端預設的key值是connect
     socket.on('connect', function () {
         socket.on('update', function() {
-            console.log('update');
+            //console.log('update');
             if(RunStatus) {
                 updateChart();
             }

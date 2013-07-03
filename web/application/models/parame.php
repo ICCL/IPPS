@@ -10,6 +10,10 @@ class Parame extends CI_Model {
         $this->UserInfo = $this->session->get('UserInfo');
         //$this->verifyLogin();
 
+        /**     load config                 **/
+        $this->load->model('iconfig');
+        $this->parames['NodejsUrl'] = $this->iconfig->getNodejsUrl();
+
         /**     load basic lagnuage         **/
         $this->lang->load('basic','zh-TW');
 

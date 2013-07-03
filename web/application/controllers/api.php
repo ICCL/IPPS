@@ -8,6 +8,8 @@ class Api extends CI_Controller {
         $this->load->model('db/soil');
         $this->load->model('db/temperature');
         $this->load->model('db/equipment');
+        $this->load->model('db/safetys');
+        $this->load->model('iconfig');
     }
 
     public function index($hum='', $light='', $soil='', $temp='') {
@@ -18,20 +20,120 @@ class Api extends CI_Controller {
             $this->light->Add($light);
 
             /* call nodejs update front-end chart update */
-            $ch = curl_init('http://192.168.10.103:8808/chart_update');
+            $ch = curl_init($this->iconfig->getNodejsUrl().'/chart_update');
             curl_exec($ch);
+
+            $this->checkVal($hum, $light, $soil, $temp);
 
             /* Send Data to mobile use GCM */
             $this->load->model('mgcm');
+            $this->mgcm->activity('UpdateData');
         } else {
             show_404();
         }
     }
 
-    public function equipment($id='') {
-        if(!empty($id)) {
-            $this->equipment->setStatus($id);
+    private function checkVal($hum, $light, $soil, $temp) {
+        $safe_hum;$safe_light;$safe_soil;$safe_temp;
+        $equipmentStatus = $this->equipment->SWhere('Status');
+        foreach($equipmentStatus->result() as $row) {
+            $equipmentStatus = $row->status;
+            break;
         }
+
+        if($equipmentStatus == '1') {
+            $data = array();
+            $query = $this->safetys->Select();
+            foreach($query->result() as $row) {
+                if(strlen($row->value) > 0) {
+                    switch($row->en_name) {
+                    case 'Humidity':
+                        $safe_hum = $row->value;
+                        break;
+                    case 'Light':
+                        $safe_light = $row->value;
+                        break;
+                    case 'Soil':
+                        $safe_soil = $row->value;
+                        break;
+                    case 'Temperature':
+                        $safe_temp = $row->value;
+                        break;
+                    }
+                }
+            }
+
+
+            $i = 0;
+            if(!empty($safe_light)) {
+                if($light < $safe_light) {
+                    $data[] = array('Lamp', 'Error');
+                    $i++;
+                } else {
+                    $data[] = array('Lamp', 'Normal');
+                }
+            }
+
+            if(!empty($safe_temp) && !empty($safe_hum)) {
+                if($temp > $safe_temp || $hum > $safe_hum) {
+                    $data[] = array('Fan', 'Error');
+                    $i++;
+                } else {
+                    $data[] = array('Fan', 'Normal');
+                }
+            }
+
+            if(!empty($safe_soil)) {
+                if($soil < $safe_soil) {
+                    $data[] = array('Sprinkler', 'Error');
+                    $i++;
+                } else {
+                    $data[] = array('Sprinkler', 'Normal');
+                }
+            }
+
+            $result = array('ErrorCount'=> $i, 'data'=> $data);
+            if($i > 0) {
+                /* Send Data to mobile use GCM */
+                $this->load->model('mgcm');
+                $this->mgcm->activity('Notification', $result);
+            }
+        }
+    }
+
+    public function safetys() {
+         $Query = $this->safetys->Select();
+
+        $result = '';
+        foreach($Query->result() as $row) {
+            $result .= $row->value.",";
+        }
+        $result = substr($result, 0, -1);
+
+        $Url = $this->iconfig->getSensorUrl()."/safetys[$result]";
+        $ch = curl_init($Url);
+        curl_exec($ch);
+    }
+
+    public function equipment($sensor, $status) {
+        if(!empty($sensor) && !empty($status)) {
+            $this->equipment->setStatus($sensor, $status);
+
+            /*  Send activity Status to Sensor*/
+            $Url = $this->iconfig->getSensorUrl()."/$sensor=$status";
+            $ch = curl_init($Url);
+            curl_exec($ch);
+
+            /* Send Sensor Status to mobile use GCM */
+            $this->load->model('mgcm');
+            $this->mgcm->activity('UpdateSensorStatus');
+        }
+    }
+
+    public function equipmentStatus() {
+        /* Send Sensor Status to mobile use GCM */
+        $this->load->model('mgcm');
+        $this->mgcm->activity('UpdateSensorStatus');
     }
 
     public function Humidity($data) {

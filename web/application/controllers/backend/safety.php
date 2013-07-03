@@ -7,6 +7,7 @@ class Safety extends CI_Controller {
         $this->UserInfo = $this->parame->getUserInfo();
         $this->parames = $this->parame->getParams();
 
+        $this->load->model('iconfig');
         $this->load->model('db/safetys');
     }
 
@@ -30,7 +31,23 @@ class Safety extends CI_Controller {
         if(!empty($submit)) {
             $data = array('name'=> $name, 'value'=> $value);
             $this->safetys->Update($id, $data);
+
+            $this->sendSafetys();
             $this->parames-redirect(site_url('backend/safety').'/');
         }
+    }
+
+    private function sendSafetys() {
+        $Query = $this->safetys->Select();
+
+        $result = '';
+        foreach($Query->result() as $row) {
+            $result .= $row->value.",";
+        }
+        $result = substr($result, 0, -1);
+
+        $Url = $this->iconfig->getSensorUrl()."/safetys[$result]";
+        $ch = curl_init($Url);
+        curl_exec($ch);
     }
 }

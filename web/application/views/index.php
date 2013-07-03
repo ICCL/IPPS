@@ -9,7 +9,8 @@
     <link href="<?php echo site_url('statics/css/frontend.css');?>" rel="stylesheet" />
 
     <!-- js -->
-    <script src="http://192.168.10.103:8808/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
+    <!--<script src="http://192.168.10.103:8808/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>-->
+    <script src="<?php echo $NodejsUrl; ?>/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="//www.google.com/jsapi" type="text/javascript" charset="utf-8"></script>
     <script src="<?php echo site_url('statics/lib/bootstrap/docs/assets/js/bootstrap.min.js');?>"></script>
