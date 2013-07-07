@@ -70,6 +70,6 @@ node_modules
 
 # Config
 web/application/config/database.php
-web/application/models/mgcm.php
+web/application/models/iconfig.php
 web/application/config/database.php
 app/IPPS/src/main/java/tw/iccl/config/config.java
