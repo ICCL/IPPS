@@ -516,6 +516,10 @@
     <string name="fan">Fan</string>
     <string name="hum_soilUnit">%</string>
     <string name="humidity">Humidity</string>
+    <string name="key_humidity">humidity</string>
+    <string name="key_light">light</string>
+    <string name="key_soil">soil</string>
+    <string name="key_temperature">temperature</string>
     <string name="lamp">Lamp</string>
     <string name="light">Light</string>
     <string name="lightUnit">lm</string>
@@ -526,11 +530,15 @@
     <string name="notification_lamp">給我陽光</string>
     <string name="notification_sprinkler">我要喝水</string>
     <string name="setting_safetys">Safetys</string>
+    <string name="setting_safetys_hum_dialog">Humidity value.</string>
+    <string name="setting_safetys_light_dialog">Light value.</string>
+    <string name="setting_safetys_soil_dialog">Soil value.</string>
+    <string name="setting_safetys_temp_dialog">Temperature value.</string>
     <string name="setting_set_safetys">Setting Safetys</string>
     <string name="soil">Soil</string>
     <string name="sprinkler">Sprinkler</string>
     <string name="tempUnit">℃</string>
-    <string name="temperature">Temp.</string>
+    <string name="temperature">Temperature</string>
 
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

@@ -19,10 +19,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import static tw.iccl.config.config.Url;
+import tw.iccl.option.Preferences;
+
 import static tw.iccl.Notification.Notification.BR_NOTIFICATION;
+import static tw.iccl.config.config.Url;
 import static tw.iccl.view.Device.BR_DEVICEDATA;
-import static tw.iccl.view.Device.TAG;
 import static tw.iccl.view.Sensor.BR_SENSORDATA;
 
 /**
@@ -62,24 +63,22 @@ public class PullService {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(BR_GCM)) {
+                if(D) Log.e(TAG, "BR_GCM");
                 String result = intent.getStringExtra("msg");
                 if(D) Log.e(TAG, "result: "+ result);
                 try {
                     JSONObject obj = new JSONObject(result);
                     String Kind = obj.getString("Kind");
                     if(Kind.equals(Kind_UpdateData)) {
-                        Intent mIntent = new Intent(BR_SENSORDATA);
-                        JSONArray jsonArray = new JSONArray(obj.getString("data"));
-                        for(int i=0;i<jsonArray.length();i++) {
-                            mIntent.putExtra("Kind", i+2);
-                            mIntent.putExtra("result", GetVal(jsonArray.getJSONObject(i).toString()));
-                            mContext.sendBroadcast(mIntent);
-                        }
+                        String Response = obj.getString("data");
+                        Response(Response);
                     } else if(Kind.equals(Kind_UpdateSensorStatus)) {
+                        if(D) Log.e(TAG, "Kind_UpdateSensorStatus");
                         Intent mIntent = new Intent(BR_DEVICEDATA);
                         mIntent.putExtra("result", obj.getString("data"));
                         mContext.sendBroadcast(mIntent);
                     } else if(Kind.equals(Kind_Notification)) {
+                        if(D) Log.e(TAG, "Kind_Notification");
                         Intent mIntent = new Intent(BR_NOTIFICATION);
                         mIntent.putExtra("result", obj.getString("data"));
                         mContext.sendBroadcast(mIntent);
@@ -88,13 +87,15 @@ public class PullService {
                     e.printStackTrace();
                 }
             } else if (action.equals(BR_Pull)) {
+                if(D) Log.e(TAG, "BR_Pull");
                 int Kind = intent.getIntExtra("Kind", 0);
                 switch(Kind) {
                     case GET_EquipmentStatus:
-                        Pull(Kind);
                         if(D) Log.e(TAG, "GET_EquipmentStatus");
+                        Pull(Kind);
                         break;
                     default:
+                        if(D) Log.e(TAG, "default");
                         int getCount = intent.getIntExtra("getCount", 0);
                         Pull(Kind, getCount);
                         if(D) Log.e(TAG, "default");
@@ -137,29 +138,58 @@ public class PullService {
             case GET_ALL:
                 GetUrl = url_ALL + getCount;
                 break;
-            case GET_TEMPERATURE:
-                GetUrl = url_TEMPERATURE + getCount;
-                break;
-            case GET_HUMIDITY:
-                GetUrl = url_HUMIDITY + getCount;
-                break;
-            case GET_LIGHT:
-                GetUrl = url_LIGHT + getCount;
-                break;
-            case GET_SOIL:
-                GetUrl = url_SOIL + getCount;
-                break;
-            case GET_EquipmentStatus:
-                GetUrl = url_EquipmentStatus;
-                break;
         }
         new PullServer(GetUrl, Kind);
     }
 
-    private String GetVal(String result) throws JSONException {
-        JSONObject obj = new JSONObject(result);
-        JSONArray jsonArray = new JSONArray(obj.getString("data"));
-        return jsonArray.getJSONObject(0).getString("value");
+    private void Response(String result) {
+        try {
+            if(D) Log.e(TAG, "result: " + result);
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++) {
+                JSONArray data = new JSONArray(jsonArray.getJSONObject(i).getString("data"));
+                JSONObject safety = new JSONObject(jsonArray.getJSONObject(i).getString("safety"));
+
+                String name = getSafety(safety);
+                getData(data, name);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getSafety(JSONObject result) throws JSONException {
+        String en_name = result.getString("en_name");
+        String value = result.getString("value");
+        if(D) Log.e(TAG, "name: " + en_name + " value: " + value);
+        Preferences mPreferences = new Preferences(mContext);
+        if(en_name.equals("Humidity")) {
+            mPreferences.setPreferences(mPreferences.HUMIDITY, value);
+        } else if (en_name.equals("Light")){
+            mPreferences.setPreferences(mPreferences.LIGHT, value);
+        } else if (en_name.equals("Soil")){
+            mPreferences.setPreferences(mPreferences.SOIL, value);
+        } else if (en_name.equals("Temperature")){
+            mPreferences.setPreferences(mPreferences.TEMPERATURE, value);
+        }
+        return en_name;
+    }
+
+    private void getData(JSONArray result, String name) throws JSONException {
+        int value = result.getJSONObject(0).getInt("value");
+        Intent mIntent = new Intent(BR_SENSORDATA);
+        if(name.equals("Humidity")) {
+            mIntent.putExtra("Kind", GET_HUMIDITY);
+        } else if (name.equals("Light")){
+            mIntent.putExtra("Kind", GET_LIGHT);
+        } else if (name.equals("Soil")){
+            mIntent.putExtra("Kind", GET_SOIL);
+        } else if (name.equals("Temperature")){
+            mIntent.putExtra("Kind", GET_TEMPERATURE);
+        }
+        mIntent.putExtra("value", value);
+        mContext.sendBroadcast(mIntent);
     }
 
     private Handler mHandler = new Handler() {
@@ -167,43 +197,14 @@ public class PullService {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             String result = (String) msg.obj;
-            int kind = (int)msg.arg1;
-            Intent mIntent = new Intent(BR_SENSORDATA);
-            if(D) Log.e(TAG, "result: "+ result);
-            try {
-                switch(kind) {
-                    case GET_ALL:
-                        JSONArray jsonArray = new JSONArray(result);
-                        for(int i=0;i<jsonArray.length();i++) {
-                            mIntent.putExtra("Kind", i+2);
-                            mIntent.putExtra("result", GetVal(jsonArray.getJSONObject(i).toString()));
-                            mContext.sendBroadcast(mIntent);
-                        }
-                        break;
-                    case GET_HUMIDITY:
-                        mIntent.putExtra("Kind", GET_HUMIDITY);
-                        mIntent.putExtra("result", GetVal(result));
-                        mContext.sendBroadcast(mIntent);
-                        break;
-                    case GET_LIGHT:
-                        mIntent.putExtra("Kind", GET_LIGHT);
-                        mIntent.putExtra("result", GetVal(result));
-                        mContext.sendBroadcast(mIntent);
-                        break;
-                    case GET_SOIL:
-                        mIntent.putExtra("Kind", GET_SOIL);
-                        mIntent.putExtra("result", GetVal(result));
-                        mContext.sendBroadcast(mIntent);
-                        break;
-                    case GET_TEMPERATURE:
-                        mIntent.putExtra("Kind", GET_TEMPERATURE);
-                        mIntent.putExtra("result", GetVal(result));
-                        mContext.sendBroadcast(mIntent);
-                        break;
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            int Kind = msg.arg1;
+            switch(Kind) {
+                case GET_EquipmentStatus:
+                    break;
+                default:
+                    Response(result);
             }
+
         }
     };
 
@@ -211,11 +212,11 @@ public class PullService {
 
         private String result;
         private String Url;
-        private int kind;
+        private int Kind;
 
         PullServer(String Url, int kind) {
             this.Url = Url;
-            this.kind = kind;
+            this.Kind = kind;
             Thread mThread = new Thread(this);
             mThread.start();
         }
@@ -238,8 +239,8 @@ public class PullService {
 
         private void sendMessage() {
             Message m = Message.obtain(mHandler);
+            m.arg1 = Kind;
             m.obj = result;
-            m.arg1 = kind;
             mHandler.sendMessage(m);
         }
     }

@@ -21,8 +21,8 @@ public class MainActivity extends SherlockActivity {
     public final static boolean D = true;
     public final static String TAG = "MainActivity";
 
-    private Sensor mSensor;
-    private Device mDevice;
+    private Sensor mSensor = null;
+    private Device mDevice = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +50,8 @@ public class MainActivity extends SherlockActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        mSensor.DisableReceiver();
-        mDevice.DisableReceiver();
+        if(mSensor != null) mSensor.DisableReceiver();
+        if(mDevice != null) mDevice.DisableReceiver();
     }
 
     private void cancelNotificationAll() {

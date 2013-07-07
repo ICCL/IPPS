@@ -11,6 +11,11 @@ import tw.iccl.ipps.R;
  * Created by Macintosh on 13/7/1.
  */
 public class Setting extends SherlockPreferenceActivity {
+
+    /***	Debugging	***/
+    private static final String TAG = "Setting";
+    private static final boolean D  = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

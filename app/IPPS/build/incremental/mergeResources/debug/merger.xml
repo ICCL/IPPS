@@ -4520,25 +4520,41 @@ true
             <file
                 path="/Users/git/IPPS/app/IPPS/src/main/res/values/strings.xml"
                 qualifiers="" >
-                <string name="notification_sprinkler" >我要喝水
-                </string>
-                <string name="soil" >Soil
-                </string>
                 <string name="action_settings" >Settings
-                </string>
-                <string name="manual" >Manual
                 </string>
                 <string name="setting_set_safetys" >Setting Safetys
                 </string>
-                <string name="fan" >Fan
+                <string name="key_soil" >soil
                 </string>
                 <string name="notification_lamp" >給我陽光
                 </string>
-                <string name="lamp" >Lamp
+                <string name="key_light" >light
+                </string>
+                <string name="setting_safetys_soil_dialog" >Soil value.
+                </string>
+                <string name="disable" >disable
+                </string>
+                <string name="notification_default" >訊息:
+                </string>
+                <string name="notification" >Notification
+                </string>
+                <string name="key_humidity" >humidity
+                </string>
+                <string name="soil" >Soil
+                </string>
+                <string name="notification_sprinkler" >我要喝水
+                </string>
+                <string name="manual" >Manual
+                </string>
+                <string name="fan" >Fan
+                </string>
+                <string name="humidity" >Humidity
                 </string>
                 <string name="sprinkler" >Sprinkler
                 </string>
-                <string name="humidity" >Humidity
+                <string name="lamp" >Lamp
+                </string>
+                <string name="key_temperature" >temperature
                 </string>
                 <string name="hum_soilUnit" >%
                 </string>
@@ -4548,23 +4564,23 @@ true
                 </string>
                 <string name="setting_safetys" >Safetys
                 </string>
-                <string name="disable" >disable
+                <string name="setting_safetys_temp_dialog" >Temperature value.
+                </string>
+                <string name="setting_safetys_light_dialog" >Light value.
                 </string>
                 <string name="light" >Light
-                </string>
-                <string name="notification_default" >訊息:
                 </string>
                 <string name="auto" >Auto
                 </string>
                 <string name="app_name" >IPPS
                 </string>
-                <string name="notification" >Notification
+                <string name="temperature" >Temperature
                 </string>
                 <string name="notification_fan" >我好熱!!
                 </string>
-                <string name="temperature" >Temp.
-                </string>
                 <string name="lightUnit" >lm
+                </string>
+                <string name="setting_safetys_hum_dialog" >Humidity value.
                 </string>
             </file>
             <file

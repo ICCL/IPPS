@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/sensor_hum"
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="#4FB6B3">
+    <ImageView
+            style="@style/sensor_logo"
+            android:src="@drawable/humidity"
+            android:id="@+id/imageButton" />
+    <TextView
+            android:layout_above="@+id/val_hum"
+            android:layout_gravity="center_horizontal|center_vertical"
+            style="@style/sensor_unit"
+            android:text="@string/hum_soilUnit"
+            android:id="@+id/unit_hum" />
+    <TextView
+            android:layout_above="@+id/HumName"
+            android:layout_gravity="center_horizontal|center_vertical"
+            style="@style/sensor_value"
+            android:text="10"
+            android:id="@+id/val_hum"/>
+    <TextView
+            style="@style/sensor_name"
+            android:id="@+id/HumName"
+            android:textColor="#ffffff"
+            android:text="@string/humidity"/>
+</RelativeLayout>

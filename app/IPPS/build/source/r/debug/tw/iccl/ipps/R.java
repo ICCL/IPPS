@@ -992,21 +992,29 @@ containing a value of this type.
         public static final int fan=0x7f0a0012;
         public static final int hum_soilUnit=0x7f0a0013;
         public static final int humidity=0x7f0a0014;
-        public static final int lamp=0x7f0a0015;
-        public static final int light=0x7f0a0016;
-        public static final int lightUnit=0x7f0a0017;
-        public static final int manual=0x7f0a0018;
-        public static final int notification=0x7f0a0019;
-        public static final int notification_default=0x7f0a001a;
-        public static final int notification_fan=0x7f0a001b;
-        public static final int notification_lamp=0x7f0a001c;
-        public static final int notification_sprinkler=0x7f0a001d;
-        public static final int setting_safetys=0x7f0a001e;
-        public static final int setting_set_safetys=0x7f0a001f;
-        public static final int soil=0x7f0a0020;
-        public static final int sprinkler=0x7f0a0021;
-        public static final int tempUnit=0x7f0a0022;
-        public static final int temperature=0x7f0a0023;
+        public static final int key_humidity=0x7f0a0015;
+        public static final int key_light=0x7f0a0016;
+        public static final int key_soil=0x7f0a0017;
+        public static final int key_temperature=0x7f0a0018;
+        public static final int lamp=0x7f0a0019;
+        public static final int light=0x7f0a001a;
+        public static final int lightUnit=0x7f0a001b;
+        public static final int manual=0x7f0a001c;
+        public static final int notification=0x7f0a001d;
+        public static final int notification_default=0x7f0a001e;
+        public static final int notification_fan=0x7f0a001f;
+        public static final int notification_lamp=0x7f0a0020;
+        public static final int notification_sprinkler=0x7f0a0021;
+        public static final int setting_safetys=0x7f0a0022;
+        public static final int setting_safetys_hum_dialog=0x7f0a0023;
+        public static final int setting_safetys_light_dialog=0x7f0a0024;
+        public static final int setting_safetys_soil_dialog=0x7f0a0025;
+        public static final int setting_safetys_temp_dialog=0x7f0a0026;
+        public static final int setting_set_safetys=0x7f0a0027;
+        public static final int soil=0x7f0a0028;
+        public static final int sprinkler=0x7f0a0029;
+        public static final int tempUnit=0x7f0a002a;
+        public static final int temperature=0x7f0a002b;
     }
     public static final class style {
         /** 

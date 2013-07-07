@@ -84,6 +84,9 @@ public class Device {
 
         init_view();
         onReceiver();
+
+        mPushIntent = new Intent(BR_PUSH);
+        mPushIntent.putExtra("Kind", "Equipment");
     }
 
     private View findViewById(int R) {
@@ -137,10 +140,10 @@ public class Device {
             StatusBtn.Display(!StatusBtn.getBtnStatus());
 
             if(StatusBtn.getBtnStatus()) {
-                mPushIntent.putExtra("Kind", "Status");
+                mPushIntent.putExtra("Item", "Status");
                 mPushIntent.putExtra("Status", "Auto");
             } else {
-                mPushIntent.putExtra("Kind", "Status");
+                mPushIntent.putExtra("Item", "Status");
                 mPushIntent.putExtra("Status", "Manually");
             }
             mContext.sendBroadcast(mPushIntent);
@@ -155,10 +158,10 @@ public class Device {
                 LampBtn.Display(!LampBtn.getBtnStatus());
 
                 if(LampBtn.getBtnStatus()) {
-                    mPushIntent.putExtra("Kind", "Lamp");
+                    mPushIntent.putExtra("Item", "Lamp");
                     mPushIntent.putExtra("Status", "on");
                 } else {
-                    mPushIntent.putExtra("Kind", "Lamp");
+                    mPushIntent.putExtra("Item", "Lamp");
                     mPushIntent.putExtra("Status", "off");
                 }
                 mContext.sendBroadcast(mPushIntent);
@@ -174,10 +177,10 @@ public class Device {
                 FanBtn.Display(!FanBtn.getBtnStatus());
 
                 if(FanBtn.getBtnStatus()) {
-                    mPushIntent.putExtra("Kind", "Fan");
+                    mPushIntent.putExtra("Item", "Fan");
                     mPushIntent.putExtra("Status", "on");
                 } else {
-                    mPushIntent.putExtra("Kind", "Fan");
+                    mPushIntent.putExtra("Item", "Fan");
                     mPushIntent.putExtra("Status", "off");
                 }
                 mContext.sendBroadcast(mPushIntent);
@@ -193,10 +196,10 @@ public class Device {
                 SprinklerBtn.Display(!SprinklerBtn.getBtnStatus());
 
                 if(SprinklerBtn.getBtnStatus()) {
-                    mPushIntent.putExtra("Kind", "Sprinkler");
+                    mPushIntent.putExtra("Item", "Sprinkler");
                     mPushIntent.putExtra("Status", "on");
                 } else {
-                    mPushIntent.putExtra("Kind", "Sprinkler");
+                    mPushIntent.putExtra("Item", "Sprinkler");
                     mPushIntent.putExtra("Status", "off");
                 }
                 mContext.sendBroadcast(mPushIntent);

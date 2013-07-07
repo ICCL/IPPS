@@ -4,16 +4,28 @@
     <PreferenceCategory android:title="@string/setting_safetys"
                         android:summary="@string/setting_set_safetys">
         <EditTextPreference
-                android:key="@string/temperature"
-                android:title="@string/temperature"/>
+                android:key="@string/key_temperature"
+                android:title="@string/temperature"
+                android:summary=""
+                android:dialogTitle="@string/setting_safetys_temp_dialog"
+                />
         <EditTextPreference
-                android:key="@string/humidity"
-                android:title="@string/humidity"/>
+                android:key="@string/key_humidity"
+                android:title="@string/humidity"
+                android:summary=""
+                android:dialogTitle="@string/setting_safetys_hum_dialog"
+                />
         <EditTextPreference
-                android:key="@string/light"
-                android:title="@string/light"/>
+                android:key="@string/key_light"
+                android:title="@string/light"
+                android:summary=""
+                android:dialogTitle="@string/setting_safetys_light_dialog"
+                />
         <EditTextPreference
-                android:key="@string/soil"
-                android:title="@string/soil"/>
+                android:key="@string/key_soil"
+                android:title="@string/soil"
+                android:summary=""
+                android:dialogTitle="@string/setting_safetys_soil_dialog"
+                />
     </PreferenceCategory>
 </PreferenceScreen>

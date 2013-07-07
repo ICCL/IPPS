@@ -34,8 +34,15 @@ public class PushService {
             String action = intent.getAction();
             if (action.equals(BR_PUSH)) {
                 String Kind = intent.getStringExtra("Kind");
-                String Status = intent.getStringExtra("Status");
-                PushUrl = Url+"/api/equipment/" + Kind + "/" + Status;
+                if(Kind.equals("Equipment")) {
+                    String Item = intent.getStringExtra("Item");
+                    String Status = intent.getStringExtra("Status");
+                    PushUrl = Url+"/api/equipment/" + Item + "/" + Status;
+                } else if (Kind.equals("Safetys")) {
+                    String Item = intent.getStringExtra("Item");
+                    String Value = intent.getStringExtra("Value");
+                    PushUrl = Url+"/api/setSafetys/" + Item + "/" + Value;
+                }
                 new PushServer();
             }
         }

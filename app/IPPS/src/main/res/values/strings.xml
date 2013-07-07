@@ -21,7 +21,7 @@
     </string>
     <string name="soil" >Soil
     </string>
-    <string name="temperature" >Temp.
+    <string name="temperature" >Temperature
     </string>
     <string name="lightUnit" >lm
     </string>
@@ -46,5 +46,21 @@
     <string name="setting_safetys" >Safetys
     </string>
     <string name="setting_set_safetys" >Setting Safetys
+    </string>
+    <string name="setting_safetys_hum_dialog" >Humidity value.
+    </string>
+    <string name="setting_safetys_light_dialog" >Light value.
+    </string>
+    <string name="setting_safetys_soil_dialog" >Soil value.
+    </string>
+    <string name="setting_safetys_temp_dialog" >Temperature value.
+    </string>
+    <string name="key_humidity" >humidity
+    </string>
+    <string name="key_light" >light
+    </string>
+    <string name="key_soil" >soil
+    </string>
+    <string name="key_temperature" >temperature
     </string>
 </resources>

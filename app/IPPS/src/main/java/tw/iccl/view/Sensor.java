@@ -46,20 +46,20 @@ public class Sensor {
             String action = intent.getAction();
             if(action.equals(BR_SENSORDATA)) {
                 int Kind = intent.getIntExtra("Kind", 0);
-                String val = intent.getStringExtra("result");
-                if(D) Log.e(TAG, "val: "+ val);
+                String value = intent.getIntExtra("value", 0)+"";
+//                if(D) Log.e(TAG, "value: "+ value);
                 switch(Kind) {
                     case GET_HUMIDITY:
-                        vHum.setText(val);
+                        vHum.setText(value);
                         break;
                     case GET_LIGHT:
-                        vLight.setText(val);
+                        vLight.setText(value);
                         break;
                     case GET_SOIL:
-                        vSoil.setText(val);
+                        vSoil.setText(value);
                         break;
                     case GET_TEMPERATURE:
-                        vTemp.setText(val);
+                        vTemp.setText(value);
                         break;
                 }
             }
