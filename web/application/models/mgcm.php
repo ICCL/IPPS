@@ -7,26 +7,44 @@ class Mgcm extends CI_Model {
         parent::__construct();
 
         $this->load->model('db/gcm');
+        $this->load->model('db/iconfig');
 
         $this->load->model('db/safetys');
         $this->load->model('db/humidity');
         $this->load->model('db/light');
         $this->load->model('db/soil');
         $this->load->model('db/temperature');
+        $this->load->model('db/equipment');
 
-        $this->GoogleKey = "your_google_key";
+        $this->GoogleKey = $this->iconfig->getGoogleKey();
 
-        $this->init();
     }
 
-    public function init() {
+    public function activity($activity, $Data='') {
         $this->getRegId(1);
-        $result[] = $this->getHum();
-        $result[] = $this->getLight();
-        $result[] = $this->getSoil();
-        $result[] = $this->getTemp();
+        switch($activity) {
+            case 'UpdateData':
+                $data[] = $this->getHum();
+                $data[] = $this->getLight();
+                $data[] = $this->getSoil();
+                $data[] = $this->getTemp();
 
-        $this->send(json_encode($result));
+                $result = array('Kind'=> 'UpdateData', 'data'=> $data);
+                $this->send(json_encode($result));
+                break;
+            case 'UpdateSensorStatus':
+                $Query = $this->equipment->Select();
+                foreach($Query->result() as $row) {
+                    $data[] = array($row->name, $row->status);
+                }
+                $result = array('Kind'=> 'UpdateSensorStatus', 'data'=> $data);
+                $this->send(json_encode($result));
+                break;
+            case 'Notification':
+                $result = array('Kind'=> 'Notification', 'data'=> $Data);
+                $this->send(json_encode($result));
+                break;
+        }
     }
 
     public function getRegId($uid) {
@@ -34,7 +52,6 @@ class Mgcm extends CI_Model {
         if($query->num_rows > 0) {
             foreach($query->result() as $row) {
                 $this->RegId[] = $row->reg_id;
-                break;
             }
         }
     }
