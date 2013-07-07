@@ -11,4 +11,10 @@ class Index extends CI_Controller {
     public function index() {
         $this->load->view('index', $this->parames);
     }
+
+    public function ajaxNodeUrl() {
+        $this->load->model('iconfig');
+        $result = array('url'=> $this->iconfig->getNodejsUrl());
+        echo json_encode($result);
+    }
 }
