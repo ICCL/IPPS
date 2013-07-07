@@ -3,16 +3,21 @@ google.setOnLoadCallback(drawChart);
 function drawChart() {
   $(function() {
     var time = 5000, Run, RunStatus = false, Title;
+    var NodeJsUrl = '';
 
-    //var socket = io.connect('http://192.168.10.103:8808');
-    var socket = io.connect('http://192.168.0.131:8808');
-    //.on()為socket的接收端，client端預設的key值是connect
-    socket.on('connect', function () {
-        socket.on('update', function() {
-            //console.log('update');
-            if(RunStatus) {
-                updateChart();
-            }
+    var getNodeUrl = $.getJSON('/ipps/index/ajaxNodeUrl');
+
+    var UnitArr = {Humidity: '%', Light: 'lm', Soil: '%', Temperature: '℃'};
+    $.when(getNodeUrl)
+    .done(function(response) {
+        var socket = io.connect(response.url);
+        //.on()為socket的接收端，client端預設的key值是connect
+        socket.on('connect', function () {
+            socket.on('update', function() {
+                if(RunStatus) {
+                    updateChart();
+                }
+            });
         });
     });
 
@@ -60,7 +65,9 @@ function drawChart() {
         });
         var data = google.visualization.arrayToDataTable(chartData);
         var options = {
-          title: Title
+          title: Title,
+          vAxis: {title: Title + '(' + UnitArr[Title] + ')'},
+          hAxis: {title: ''}
         };
         var chart = new google.visualization.LineChart(document.getElementById('chart'+Title));
         chart.draw(data, options);
