@@ -19,11 +19,11 @@ class Api extends CI_Controller {
             $this->soil->Add($soil);
             $this->light->Add($light);
 
+            $this->checkVal($hum, $light, $soil, $temp);
+
             /* call nodejs update front-end chart update */
             $ch = curl_init($this->iconfig->getNodejsUrl().'/chart_update');
             curl_exec($ch);
-
-            $this->checkVal($hum, $light, $soil, $temp);
 
             /* Send Data to mobile use GCM */
             $this->load->model('mgcm');
@@ -101,10 +101,42 @@ class Api extends CI_Controller {
         }
     }
 
-    public function safetys() {
-         $Query = $this->safetys->Select();
+    public function setSafetys($Item='' , $Value='') {
+        if(!empty($Item)) {
+            $data = array('value'=> $Value);
+            switch($Item) {
+                case 'humidity':
+                    $this->safetys->Update(1, $data);
+                    break;
+                case 'light':
+                    $this->safetys->Update(2, $data);
+                    break;
+                case 'soil':
+                    $this->safetys->Update(3, $data);
+                    break;
+                case 'temperature':
+                    $this->safetys->Update(4, $data);
+                    break;
+            }
 
+            /* call nodejs update front-end chart update */
+            $ch = curl_init($this->iconfig->getNodejsUrl().'/chart_update');
+            curl_exec($ch);
+
+            /* call api/safetys update Sensor safetys */
+            $ch = curl_init($this->iconfig->getServerUrl().'/api/safetys');
+            curl_exec($ch);
+
+            /* Send Data to mobile use GCM */
+            $this->load->model('mgcm');
+            $this->mgcm->activity('UpdateData');
+        }
+    }
+
+    public function safetys() {
         $result = '';
+
+        $Query = $this->safetys->Select();
         foreach($Query->result() as $row) {
             $result .= $row->value.",";
         }
