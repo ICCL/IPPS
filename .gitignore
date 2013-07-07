@@ -68,7 +68,7 @@ node_modules
 
 # -------------------
 
-# Config
+# Config 
 web/application/config/database.php
 web/application/models/iconfig.php
 web/application/config/database.php
