@@ -172,42 +172,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PullService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/pullpush/PullService.java">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/ipps/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="167" column="12" selection-start="6282" selection-end="6340" vertical-scroll-proportion="-17.88" vertical-offset="2013" max-vertical-offset="3705">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PushService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/pullpush/PushService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="48" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0" vertical-offset="321" max-vertical-offset="1245">
+            <state line="45" column="19" selection-start="1203" selection-end="1203" vertical-scroll-proportion="0.65409833" vertical-offset="51" max-vertical-offset="1155">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sensor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/view/Sensor.java">
+      <file leaf-file-name="Device.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/view/Device.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0" vertical-offset="1056" max-vertical-offset="1980">
+            <state line="85" column="13" selection-start="3166" selection-end="3166" vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="2805">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PullService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/pullpush/PullService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="167" column="12" selection-start="6282" selection-end="6340" vertical-scroll-proportion="-8.96" vertical-offset="2236" max-vertical-offset="3705">
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1396#2315#0" expanded="false" />
-                <element signature="e#2308#2309#0" expanded="false" />
-                <element signature="e#3963#4208#0" expanded="false" />
-                <element signature="e#4201#4202#0" expanded="false" />
-                <element signature="e#4259#4501#0" expanded="false" />
-                <element signature="e#4494#4495#0" expanded="false" />
-                <element signature="e#4551#4792#0" expanded="false" />
-                <element signature="e#4785#4786#0" expanded="false" />
-                <element signature="e#4842#5090#0" expanded="false" />
-                <element signature="e#5083#5084#0" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -217,6 +205,15 @@
         <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/option/Setting.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="21" column="0" selection-start="517" selection-end="517" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/config/config.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="53" selection-start="439" selection-end="439" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
               <folding />
             </state>
           </provider>
@@ -253,42 +250,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DeviceBtnDisplay.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/view/DeviceBtnDisplay.java">
+      <file leaf-file-name="safetys.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IPPS/src/main/res/xml/safetys.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="5" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0" vertical-offset="621" max-vertical-offset="1545">
+            <state line="21" column="73" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="safetys.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IPPS/src/main/res/xml/safetys.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="73" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-              <folding>
-                <element signature="e#156#181#0" expanded="true" />
-                <element signature="e#222#251#0" expanded="true" />
-                <element signature="e#309#334#0" expanded="true" />
-                <element signature="e#365#386#0" expanded="true" />
-                <element signature="e#458#495#0" expanded="true" />
-                <element signature="e#571#593#0" expanded="true" />
-                <element signature="e#624#642#0" expanded="true" />
-                <element signature="e#714#750#0" expanded="true" />
-                <element signature="e#826#845#0" expanded="true" />
-                <element signature="e#876#891#0" expanded="true" />
-                <element signature="e#1077#1095#0" expanded="true" />
-                <element signature="e#1126#1140#0" expanded="true" />
-                <element signature="e#1212#1249#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IPPS/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="13" selection-start="532" selection-end="532" vertical-scroll-proportion="0.18831168" vertical-offset="156" max-vertical-offset="1080">
+            <state line="22" column="13" selection-start="532" selection-end="532" vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="1080">
               <folding />
             </state>
           </provider>
@@ -352,18 +326,18 @@
         <option value="$PROJECT_DIR$/libraries/actionbarsherlock/src/com/actionbarsherlock/view/MenuInflater.java" />
         <option value="$PROJECT_DIR$/IPPS/src/main/res/menu/aa.xml" />
         <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/option/Setting.java" />
-        <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/config/config.java" />
         <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/view/Sensor.java" />
         <option value="$PROJECT_DIR$/IPPS/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/IPPS/src/main/res/xml/setting.xml" />
         <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/option/Preferences.java" />
-        <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/ipps/MainActivity.java" />
         <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/pullpush/PullService.java" />
         <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/view/Device.java" />
         <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/pullpush/PushService.java" />
         <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/option/Safetys.java" />
         <option value="$PROJECT_DIR$/IPPS/src/main/res/xml/safetys.xml" />
         <option value="$PROJECT_DIR$/IPPS/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/config/config.java" />
+        <option value="$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/ipps/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -1103,7 +1077,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1891065" sideWeight="0.67016804" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32983193" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32983193" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1183,13 +1157,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/config/config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="1" selection-start="448" selection-end="448" vertical-scroll-proportion="0.30844155" vertical-offset="0" max-vertical-offset="924">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/IPPS/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="44" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.21147542" vertical-offset="261" max-vertical-offset="1185">
@@ -1201,22 +1168,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="19" selection-start="463" selection-end="463" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/ipps/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="13" selection-start="1068" selection-end="1068" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1155">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/view/Device.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="55" selection-start="2169" selection-end="2169" vertical-scroll-proportion="-4.16" vertical-offset="706" max-vertical-offset="3060">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1262,22 +1213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/pullpush/PullService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="167" column="12" selection-start="6282" selection-end="6340" vertical-scroll-proportion="-17.88" vertical-offset="2013" max-vertical-offset="3705">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/option/Setting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="517" selection-end="517" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/option/Safetys.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="0" selection-start="753" selection-end="753" vertical-scroll-proportion="0.0" vertical-offset="231" max-vertical-offset="1620">
@@ -1297,27 +1232,50 @@
     <entry file="file://$PROJECT_DIR$/IPPS/src/main/res/xml/safetys.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="73" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-          <folding>
-            <element signature="e#156#181#0" expanded="true" />
-            <element signature="e#222#251#0" expanded="true" />
-            <element signature="e#309#334#0" expanded="true" />
-            <element signature="e#365#386#0" expanded="true" />
-            <element signature="e#458#495#0" expanded="true" />
-            <element signature="e#571#593#0" expanded="true" />
-            <element signature="e#624#642#0" expanded="true" />
-            <element signature="e#714#750#0" expanded="true" />
-            <element signature="e#826#845#0" expanded="true" />
-            <element signature="e#876#891#0" expanded="true" />
-            <element signature="e#1077#1095#0" expanded="true" />
-            <element signature="e#1126#1140#0" expanded="true" />
-            <element signature="e#1212#1249#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IPPS/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="13" selection-start="532" selection-end="532" vertical-scroll-proportion="0.18831168" vertical-offset="156" max-vertical-offset="1080">
+        <state line="22" column="13" selection-start="532" selection-end="532" vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="1080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/option/Setting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="517" selection-end="517" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/config/config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="53" selection-start="439" selection-end="439" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/pullpush/PullService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="167" column="12" selection-start="6282" selection-end="6340" vertical-scroll-proportion="-8.96" vertical-offset="2236" max-vertical-offset="3705">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/view/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="13" selection-start="3166" selection-end="3166" vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="2805">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IPPS/src/main/java/tw/iccl/ipps/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="19" selection-start="1203" selection-end="1203" vertical-scroll-proportion="0.65409833" vertical-offset="51" max-vertical-offset="1155">
           <folding />
         </state>
       </provider>

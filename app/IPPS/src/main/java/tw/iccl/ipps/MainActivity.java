@@ -42,8 +42,8 @@ public class MainActivity extends SherlockActivity {
     protected void onResume() {
         super.onResume();
 
-        mSensor = new Sensor(this);
-        mDevice = new Device(this);
+        if(mSensor == null) mSensor = new Sensor(this);
+        if(mDevice == null) mDevice = new Device(this);
     }
 
     @Override
