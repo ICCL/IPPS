@@ -4,15 +4,17 @@ function drawChart() {
   $(function() {
     var time = 5000;
     var Run, Title;
+    var UnitArr = {Humidity: '%', Light: 'lm', Soil: '%', Temperature: '℃'};
 
+
+    destroy();
+    //Title = getTitle($(this).attr('href'));
+    Title = $('input[type="hidden"]').val();
+    Run = setInterval(draw, 200);
+    setTimeout(function() {
         destroy();
-        //Title = getTitle($(this).attr('href'));
-        Title = $('input[type="hidden"]').val();
-        Run = setInterval(draw, 200);
-        setTimeout(function() {
-            destroy();
-            Run = setInterval(draw, time);
-        }, 300);
+        Run = setInterval(draw, time);
+    }, 300);
 
     function getTitle(href) {
         return href.substr(1, href.lenght);
@@ -33,7 +35,9 @@ function drawChart() {
         });
         var data = google.visualization.arrayToDataTable(chartData);
         var options = {
-          title: Title
+          title: Title,
+          vAxis: {title: Title + '(' + UnitArr[Title] + ')'},
+          hAxis: {title: ''}
         };
         var chart = new google.visualization.LineChart(document.getElementById('chart'+Title));
         chart.draw(data, options);
