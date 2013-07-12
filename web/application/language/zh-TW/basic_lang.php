@@ -4,6 +4,7 @@ $lang['web_name']         = 'IPPS';
 $lang['front-end']        = '前台';
 $lang['back-end']         = '後台';
 $lang['login']            = '登入';
+$lang['logout']            = '登出';
 $lang['account']          = '帳戶';
 $lang['add']              = '新增';
 $lang['edit']             = '修改';
