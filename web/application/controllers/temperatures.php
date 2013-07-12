@@ -8,7 +8,7 @@ class Temperatures extends CI_Controller {
     }
 
     public function json($limit='') {
-        if(empty($limit)) $limit = 100;
+        if(empty($limit)) $limit = 30;
         $temperature = $this->temperature->Select($limit);
         if($temperature->num_rows() > 0) $temperature = $temperature->result();
 

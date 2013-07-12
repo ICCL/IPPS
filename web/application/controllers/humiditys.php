@@ -8,7 +8,7 @@ class Humiditys extends CI_Controller {
     }
 
     public function json($limit='') {
-        if(empty($limit)) $limit = 100;
+        if(empty($limit)) $limit = 30;
         $humidity = $this->humidity->Select($limit);
         if($humidity->num_rows() > 0) $humidity = $humidity->result();
 

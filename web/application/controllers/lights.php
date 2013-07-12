@@ -8,7 +8,7 @@ class Lights extends CI_Controller {
     }
 
     public function json($limit='') {
-        if(empty($limit)) $limit = 100;
+        if(empty($limit)) $limit = 30;
         $light = $this->light->Select($limit);
         if($light->num_rows() > 0) $light = $light->result();
 

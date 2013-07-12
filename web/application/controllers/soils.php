@@ -8,7 +8,7 @@ class Soils extends CI_Controller {
     }
 
     public function json($limit='') {
-        if(empty($limit)) $limit = 100;
+        if(empty($limit)) $limit = 30;
         $soil = $this->soil->Select($limit);
         if($soil->num_rows() > 0) $soil = $soil->result();
 
