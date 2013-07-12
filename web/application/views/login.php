@@ -30,7 +30,8 @@
           <?php echo $error; ?>
         </div>
         <?php } ?>
+        <div id="blackHome"><a href="<?php echo base_url('/'); ?>"><i class="icon-home"></i> Home</a></div>
       </form>
     </div>
   </body>
-</html>
+</html
