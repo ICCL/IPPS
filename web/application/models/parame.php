@@ -127,7 +127,7 @@ class Parame extends CI_Model {
         switch($url) {
         case 'backend':
             if(empty($this->UserInfo))
-                $this->redirect('/');
+                $this->redirect('/login');
         }
     }
 
