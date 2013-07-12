@@ -7,8 +7,10 @@ class Parame extends CI_Model {
 
         /**     load Session    **/
         $this->load->library('Session');
+        $this->load->helper('url');
+
         $this->UserInfo = $this->session->get('UserInfo');
-        //$this->verifyLogin();
+        $this->verifyLogin();
 
         /**     load config                 **/
         $this->load->model('iconfig');
@@ -17,7 +19,6 @@ class Parame extends CI_Model {
         /**     load basic lagnuage         **/
         $this->lang->load('basic','zh-TW');
 
-        $this->load->helper('url');
         if(preg_match('/backend/', uri_string())) {
             $this->InterfaceStatus = 0;
             $this->lang->load('backend','zh-TW');
@@ -122,8 +123,12 @@ class Parame extends CI_Model {
     }
 
     public function verifyLogin() {
-        if( !$this->UserInfo && $_SERVER["REQUEST_URI"] != '/pitcp/')
-            $this->redirect('/pitcp/');
+        $url = uri_string();
+        switch($url) {
+        case 'backend':
+            if(empty($this->UserInfo))
+                $this->redirect('/');
+        }
     }
 
     private function verifyPage($nav) {
@@ -134,7 +139,7 @@ class Parame extends CI_Model {
     }
 
     public function redirect($url) {
-        header("Location:$url");
+        header("Location: ".base_url($url) );
         exit;
     }
 
@@ -155,6 +160,7 @@ class Parame extends CI_Model {
         $Message = array(   'account'   => $this->UserInfo->account, 
                             'passwd'    => $newpassword
                         );
+
 
         $this->Mail->sendEMail($Type, $EmailInfo );
     }

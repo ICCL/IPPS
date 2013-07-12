@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Login extends CI_Controller {
+    private $UserInfo, $parames;
     public function __construct() {
         parent::__construct();
         $this->load->model('parame');
@@ -14,6 +15,8 @@ class Login extends CI_Controller {
     }
 
     private function login() {
+        if(!empty($this->UserInfo)) $this->parame->redirect('backend');
+
         $account  = $this->input->post('account', TRUE);
         $password = $this->input->post('password', TRUE);
         $submit   = $this->input->post('submit', TRUE);
@@ -26,12 +29,11 @@ class Login extends CI_Controller {
                 $this->parames['error'] = $this->lang->line('login_error_password');
             } else {
                 $this->load->model('db/users');
-                //$this->load->model('db/user_infos');
                 $UserInfoId = $this->users->verifyUser($account, $password);
                 if($UserInfoId) {
-                    //$this->UserInfo = $this->user_infos->UserInfo($UserInfoId);
-                    //$this->session->set('UserInfo', $this->UserInfo);
-                    $this->parame->redirect(site_url("backend").'/');
+                    $this->UserInfo = array('user'=> $account);
+                    $this->session->set('UserInfo', $this->UserInfo);
+                    $this->parame->redirect('/backend');
                 } else {
                     $this->parames['error'] = $this->lang->line('login_error_password');
                 }

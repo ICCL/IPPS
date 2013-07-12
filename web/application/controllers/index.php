@@ -12,6 +12,11 @@ class Index extends CI_Controller {
         $this->load->view('index', $this->parames);
     }
 
+    public function logout() {
+        $this->session->_destroy();
+        $this->parame->redirect('/');
+    }
+
     public function ajaxNodeUrl() {
         $this->load->model('iconfig');
         $result = array('url'=> $this->iconfig->getNodejsUrl());
