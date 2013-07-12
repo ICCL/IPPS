@@ -1,13 +1,12 @@
-google.load("visualization", "1", {packages:["corechart"]});
-google.setOnLoadCallback(drawChart);
-function drawChart() {
-  $(function() {
+$(function() {
     var time = 5000, Run, RunStatus = false, Title;
     var NodeJsUrl = '';
 
     var getNodeUrl = $.getJSON('/ipps/index/ajaxNodeUrl');
 
-    var UnitArr = {Humidity: '%', Light: 'lm', Soil: '%', Temperature: '℃'};
+    var TitleUnit = {humidity: {unit: '%', title: 'Humidity'}, light: {unit: 'lm', title: 'Light'},
+                    soil: {unit: '%', title: 'Soil'}, temperature: {unit: '℃', title: 'Temperature'}};
+
     $.when(getNodeUrl)
     .done(function(response) {
         var socket = io.connect(response.url);
@@ -23,7 +22,6 @@ function drawChart() {
 
     $('ul li a').on('click', function() {
         RunStatus = true;
-        destroy();
         Title = getTitle($(this).attr('href'));
 
         //Original_fun();
@@ -39,11 +37,7 @@ function drawChart() {
     }
 
     function updateChart() {
-        Run = setInterval(draw, 200);
-        setTimeout(function() {
-            destroy();
-            clearTimeout();
-        }, 300);
+        draw();
     }
 
     function getTitle(href) {
@@ -55,27 +49,49 @@ function drawChart() {
     }
 
     function draw() {
-      var chartTitle = ['Date', Title, 'Safety'];
-      var chartData = new Array(chartTitle);
-      $.getJSON('/ipps/'+ Title +'s/json/',{})
-      .done(function( response ) {
-        var safety = response['safety']['value'];
-        $.each( response['data'], function( i, item ) {
-          chartData.push([item['create_at'], parseInt(item['value']), parseInt(safety)]);
+        $.getJSON('/ipps/'+ Title +'s/json/',{}).done(function(response) {
+            var data = new Array();
+            var safety = new Array()
+            $.each(response.data, function(key, val) {
+                datetime = val.create_at.split(' ');
+                date = datetime[0].split('-');
+                time = datetime[1].split(':');
+                data.push([Date.UTC(date[0], date[1]-1, date[2], time[0], time[1]), parseInt(val.value)]);
+                safety.push([Date.UTC(date[0], date[1]-1, date[2], time[0], time[1]), parseInt(response.safety.value)]);
+            });
+            $('#chart_'+Title).highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: ' '//TitleUnit[Title].title
+                },
+                subtitle: {
+                    //text: 'Source: WorldClimate.com'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                yAxis: {
+                    title: {
+                        text: TitleUnit[Title].title + '(' + TitleUnit[Title].unit + ')'
+                    }
+                },
+                tooltip: {
+                    xDateFormat: 'Date: %Y-%m %H:%M',
+                    shared: true,
+                    crosshairs: true,
+                    valueSuffix: TitleUnit[Title].unit,
+                },
+                series: [{
+                    name: TitleUnit[Title].title,
+                    data: data
+                }, {
+                    name: 'Safety',
+                    data: safety,
+                    color: '#DC3912'
+                }]
+            });
         });
-        var data = google.visualization.arrayToDataTable(chartData);
-        var options = {
-          title: Title,
-          vAxis: {title: Title + '(' + UnitArr[Title] + ')'},
-          hAxis: {title: ''}
-        };
-        var chart = new google.visualization.LineChart(document.getElementById('chart_'+Title));
-        chart.draw(data, options);
-      })
-      .fail(function( jqxhr, textStatus, error ) {
-        var err = textStatus + ', ' + error;
-        console.log( "Request Failed: " + err);
-      });
     }
-
-  });}
+});
