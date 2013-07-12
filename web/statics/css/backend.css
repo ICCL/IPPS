@@ -2,6 +2,9 @@ body {
     padding-top: 20px;
     padding-bottom: 40px;
 }
+body, button{
+    font-family:Arial,"微軟正黑體", "Microsoft JhengHei",sans-serif;
+}
 body .left {text-align: left;}
 body .center {text-align: center;}
 body .right {text-align: right;}

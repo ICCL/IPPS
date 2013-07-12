@@ -2,6 +2,10 @@ body {
     padding-top: 20px;
     padding-bottom: 60px;
 }
+body, button{
+    font-family:Arial,"微軟正黑體", "Microsoft JhengHei",sans-serif;
+}
+
 div.tab-content div.tab-pane{height: 460px;}
 div.tab-content div.tab-pane div.Chart{width: 900px;height: 400px;}
 div.footer a{color: #444;}
