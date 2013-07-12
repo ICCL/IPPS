@@ -31,7 +31,7 @@ class Login extends CI_Controller {
                 if($UserInfoId) {
                     //$this->UserInfo = $this->user_infos->UserInfo($UserInfoId);
                     //$this->session->set('UserInfo', $this->UserInfo);
-                    $this->parame->redirect(site_url("setting").'/');
+                    $this->parame->redirect(site_url("backend").'/');
                 } else {
                     $this->parames['error'] = $this->lang->line('login_error_password');
                 }
