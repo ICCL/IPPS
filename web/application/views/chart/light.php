@@ -1,2 +1,2 @@
-<input type="hidden" value="Light">
-<div id="chartLight" class="Chart"></div>
+<input type="hidden" value="light">
+<div id="chart_light"></div>

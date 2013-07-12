@@ -1,10 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Temperatures extends CI_Controller {
+    private $parames;
     public function __construct() {
         parent::__construct();
         $this->load->model('db/temperature');
         $this->load->model('db/safetys');
+
+        $this->load->model('parame');
+        $this->parames = $this->parame->getParams();
     }
 
     public function json($limit='') {

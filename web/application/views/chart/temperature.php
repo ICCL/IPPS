@@ -1,2 +1,2 @@
-<input type="hidden" value="Temperature">
-<div id="chartTemperature" class="Chart"></div>
+<input type="hidden" value="temperature">
+<div id="chart_temperature"></div>

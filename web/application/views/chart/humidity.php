@@ -1,2 +1,2 @@
-<input type="hidden" value="Humidity">
-<div id="chartHumidity" class="Chart"></div>
+<input type="hidden" value="humidity">
+<div id="chart_humidity"></div>
