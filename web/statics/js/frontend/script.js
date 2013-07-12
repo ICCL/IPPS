@@ -69,7 +69,7 @@ function drawChart() {
           vAxis: {title: Title + '(' + UnitArr[Title] + ')'},
           hAxis: {title: ''}
         };
-        var chart = new google.visualization.LineChart(document.getElementById('chart'+Title));
+        var chart = new google.visualization.LineChart(document.getElementById('chart_'+Title));
         chart.draw(data, options);
       })
       .fail(function( jqxhr, textStatus, error ) {
