@@ -11,7 +11,7 @@ class Soil extends CI_Model {
     public function Select($limit) {
         $query = "SELECT TBL.* ".
                     "FROM (SELECT * FROM ". $this->tab ." Order by create_at DESC limit $limit) as TBL ".
-                    "Order by TBL.id ASC ".
+                    "Order by TBL.create_at ASC ".
                     "Limit $limit";
         return $this->db->query($query);
     }
