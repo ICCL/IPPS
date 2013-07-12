@@ -1,4 +1,11 @@
 <div class="masthead">
+  <ul class="nav nav-pills pull-right">
+    <?php if(empty($UserInfo)) { ?>
+    <li><a href="<?php echo site_url('/login'); ?>"><?php echo $lang->line('login'); ?></a></li>
+    <?php } else { ?>
+    <li><a href="<?php echo site_url('/backend'); ?>"><?php echo $lang->line('back-end'); ?></a></li>
+    <?php } ?>
+  </ul>
   <h3 class="muted"><a href="<?php echo site_url('/'); ?>"><?php echo $lang->line('web_name'); ?></a></h3>
   <div class="navbar">
     <div class="navbar-inner">
