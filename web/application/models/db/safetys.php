@@ -14,7 +14,8 @@ class Safetys extends CI_Model {
 
     public function SWhere($id) {
         $this->db->where('id', $id);
-        return $this->db->get($this->tab)->result()[0];
+        $result = $this->db->get($this->tab)->result();
+        return $result[0];
     }
 
     public function Add($value) {
