@@ -8,7 +8,7 @@
   
   byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED}; // 乙太網路
   IPAddress ip(192, 168, 0, 30);                     // local IP
-  IPAddress remote(192, 168, 0, 119);                // remote IP
+  IPAddress remote(192, 168, 0, 128);                // remote IP
   EthernetServer Listen(80);                         // server
   EthernetClient client;                             // client
   
