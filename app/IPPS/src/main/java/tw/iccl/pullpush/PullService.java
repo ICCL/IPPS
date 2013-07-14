@@ -177,7 +177,7 @@ public class PullService {
     }
 
     private void getData(JSONArray result, String name) throws JSONException {
-        int value = result.getJSONObject(0).getInt("value");
+        String value = result.getJSONObject(0).getString("value");
         Intent mIntent = new Intent(BR_SENSORDATA);
         if(name.equals("Humidity")) {
             mIntent.putExtra("Kind", GET_HUMIDITY);
