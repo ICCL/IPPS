@@ -13,7 +13,7 @@ class Api extends CI_Controller {
     }
 
     public function index($hum='', $light='', $soil='', $temp='') {
-        if(!empty($hum) && !empty($light) && !empty($soil) && !empty($temp)) {
+        if(strlen($hum) > 0 && strlen($light) > 0 && strlen($soil) > 0 && strlen($temp) > 0) {
             $this->temperature->Add($temp);
             $this->humidity->Add($hum);
             $this->soil->Add($soil);
