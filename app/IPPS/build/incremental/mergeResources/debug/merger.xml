@@ -4681,9 +4681,7 @@ wrap_content
                     <item name="android:textColor">
 #ffffff
                     </item>
-                    <item name="android:textSize">
-84dp
-                    </item>
+                    <!-- <item name="android:textSize">64dp</item> -->
                     <item name="android:layout_centerHorizontal">
 true
                     </item>
