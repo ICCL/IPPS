@@ -27,7 +27,7 @@
   int Status = Auto;
   
   String tempLamp, tempFan, tempSprinkler;
-  int time = 0;
+  int time = 1;
   
   
 
@@ -62,13 +62,7 @@
     
     Controller();
     
-    if(Send < 10 ) {
-      //EthernetSend();
-    }
-    
-    if(Listen < 10) {
-     //EthernetListen();
-    } 
+    EthernetSend();
     EthernetListen();
     //Serial.print("Send: ");
     //Serial.print(Send);
@@ -78,7 +72,9 @@
   }
   
   void EthernetSend() {
-    if(time == 20) { 
+    Serial.print("time: ");
+    Serial.println(time);
+    if(time == 60) { 
       Deliver();
       time = 0;
     }
@@ -286,9 +282,8 @@
       tempFan = "Fanoff";
     } else if(Request.indexOf("/Sprinkler=on") > -1) {
       digitalWrite(3, HIGH);
-      delay(5000);
+      delay(1000);
       digitalWrite(3, LOW);
-      delay(3000);
       tempSprinkler = "Sprinkleron";
       SetController("Sprinkler", "off");
     } else if(Request.indexOf("/Sprinkler=off") > -1) {
