@@ -8,7 +8,7 @@
     <ImageView
             style="@style/sensor_logo"
             android:src="@drawable/temperature"
-            android:id="@+id/imageButton" />
+            android:id="@+id/ImgTemp" />
     <TextView
             android:layout_above="@+id/val_temp"
             android:layout_gravity="center_horizontal|center_vertical"
