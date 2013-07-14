@@ -78,7 +78,7 @@ $(function() {
                     }
                 },
                 tooltip: {
-                    xDateFormat: 'Date: %Y-%m %H:%M',
+                    xDateFormat: 'Date: %Y-%m-%d %H:%M',
                     shared: true,
                     crosshairs: true,
                     valueSuffix: TitleUnit[Title].unit,
