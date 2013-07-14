@@ -34,11 +34,11 @@ public class DeviceBtnDisplay {
     }
 
     private View findViewById(int R) {
-        return ((Activity)mContext).findViewById(R);
+        return ((Activity) mContext).findViewById(R);
     }
 
     private void init() {
-        switch(Device) {
+        switch (Device) {
             case Status:
                 Line = (LinearLayout) findViewById(R.id.status_line);
                 IBut = (ImageButton) findViewById(R.id.status_img);
@@ -60,35 +60,35 @@ public class DeviceBtnDisplay {
 
     public void Display(boolean status) {
         BtnStatus = status;
-        if(status)
+        if (status)
             Line.setBackgroundColor(mContext.getResources().getColor(R.color.DeviceOn));
         else
             Line.setBackgroundColor(mContext.getResources().getColor(R.color.DeviceOff));
 
-        switch(Device) {
+        switch (Device) {
             case Status:
-                if(status) {
+                if (status) {
                     IBut.setImageResource(R.drawable.auto);
                 } else {
                     IBut.setImageResource(R.drawable.not_auto);
                 }
                 break;
             case Lamp:
-                if(status) {
+                if (status) {
                     IBut.setImageResource(R.drawable.lamp_on);
                 } else {
                     IBut.setImageResource(R.drawable.lamp_off);
                 }
                 break;
             case Fan:
-                if(status) {
+                if (status) {
                     IBut.setImageResource(R.drawable.fan_on);
                 } else {
                     IBut.setImageResource(R.drawable.fan_off);
                 }
                 break;
             case Sprinkler:
-                if(status) {
+                if (status) {
                     IBut.setImageResource(R.drawable.sprinkler_on);
                 } else {
                     IBut.setImageResource(R.drawable.sprinkler_off);

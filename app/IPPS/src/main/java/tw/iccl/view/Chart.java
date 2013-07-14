@@ -39,13 +39,13 @@ public class Chart extends SherlockActivity {
         WebSettings mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);
 
-        if(D) Log.e(TAG, "Url :" + Url + "/" + Kind + "/chart");
+        if (D) Log.e(TAG, "Url :" + Url + "/" + Kind + "/chart");
         mWebView.loadUrl(Url + "/" + Kind + "/chart");
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;

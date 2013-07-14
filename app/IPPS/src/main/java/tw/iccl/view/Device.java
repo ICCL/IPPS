@@ -5,6 +5,7 @@ import static tw.iccl.view.DeviceBtnDisplay.Lamp;
 import static tw.iccl.view.DeviceBtnDisplay.Fan;
 import static tw.iccl.view.DeviceBtnDisplay.Sprinkler;
 import static tw.iccl.pullpush.PushService.BR_PUSH;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -39,33 +40,33 @@ public class Device {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(action.equals(BR_DEVICEDATA)) {
+            if (action.equals(BR_DEVICEDATA)) {
                 String result = intent.getStringExtra("result");
                 try {
                     JSONArray jsonArray = new JSONArray(result);
-                    for(int i=0;i<jsonArray.length();i++) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         String Device = new JSONArray(jsonArray.getString(i)).getString(0);
                         String Val = new JSONArray(jsonArray.getString(i)).getString(1);
-                        if(Device.equals("Status")) {
-                            if(Val.equals("1")) {
+                        if (Device.equals("Status")) {
+                            if (Val.equals("1")) {
                                 StatusBtn.Display(false);
                             } else {
                                 StatusBtn.Display(true);
                             }
-                        } else if(Device.equals("Lamp")) {
-                            if(Val.equals("0")) {
+                        } else if (Device.equals("Lamp")) {
+                            if (Val.equals("0")) {
                                 LampBtn.Display(false);
                             } else {
                                 LampBtn.Display(true);
                             }
-                        } else if(Device.equals("Fan")) {
-                            if(Val.equals("0")) {
+                        } else if (Device.equals("Fan")) {
+                            if (Val.equals("0")) {
                                 FanBtn.Display(false);
                             } else {
                                 FanBtn.Display(true);
                             }
-                        } else if(Device.equals("Sprinkler")) {
-                            if(Val.equals("0")) {
+                        } else if (Device.equals("Sprinkler")) {
+                            if (Val.equals("0")) {
                                 SprinklerBtn.Display(false);
                             } else {
                                 SprinklerBtn.Display(true);
@@ -90,7 +91,7 @@ public class Device {
     }
 
     private View findViewById(int R) {
-        return ((Activity)mContext).findViewById(R);
+        return ((Activity) mContext).findViewById(R);
     }
 
     private void onReceiver() {
@@ -133,13 +134,13 @@ public class Device {
         SprinklerBtn.Display(false);
     }
 
-    private View.OnClickListener StatusOnClick = new View.OnClickListener () {
+    private View.OnClickListener StatusOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            if(D) Log.e(TAG, "StatusBtn Click");
-            if(D) Log.e(TAG, "StatusBtn Click"+ !StatusBtn.getBtnStatus());
+            if (D) Log.e(TAG, "StatusBtn Click");
+            if (D) Log.e(TAG, "StatusBtn Click" + !StatusBtn.getBtnStatus());
             StatusBtn.Display(!StatusBtn.getBtnStatus());
 
-            if(StatusBtn.getBtnStatus()) {
+            if (StatusBtn.getBtnStatus()) {
                 mPushIntent.putExtra("Item", "Status");
                 mPushIntent.putExtra("Status", "Auto");
             } else {
@@ -150,14 +151,14 @@ public class Device {
         }
     };
 
-    private View.OnClickListener LampOnClick = new View.OnClickListener () {
+    private View.OnClickListener LampOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            if(D) Log.e(TAG, "LampBtn Click");
-            if(!StatusBtn.getBtnStatus()) {
-                if(D) Log.e(TAG, "LampBtn Click"+ !StatusBtn.getBtnStatus());
+            if (D) Log.e(TAG, "LampBtn Click");
+            if (!StatusBtn.getBtnStatus()) {
+                if (D) Log.e(TAG, "LampBtn Click" + !StatusBtn.getBtnStatus());
                 LampBtn.Display(!LampBtn.getBtnStatus());
 
-                if(LampBtn.getBtnStatus()) {
+                if (LampBtn.getBtnStatus()) {
                     mPushIntent.putExtra("Item", "Lamp");
                     mPushIntent.putExtra("Status", "on");
                 } else {
@@ -169,14 +170,14 @@ public class Device {
         }
     };
 
-    private View.OnClickListener FanOnClick = new View.OnClickListener () {
+    private View.OnClickListener FanOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            if(D) Log.e(TAG, "FanBtn Click");
-            if(!StatusBtn.getBtnStatus()) {
-                if(D) Log.e(TAG, "FanBtn Click"+ !StatusBtn.getBtnStatus());
+            if (D) Log.e(TAG, "FanBtn Click");
+            if (!StatusBtn.getBtnStatus()) {
+                if (D) Log.e(TAG, "FanBtn Click" + !StatusBtn.getBtnStatus());
                 FanBtn.Display(!FanBtn.getBtnStatus());
 
-                if(FanBtn.getBtnStatus()) {
+                if (FanBtn.getBtnStatus()) {
                     mPushIntent.putExtra("Item", "Fan");
                     mPushIntent.putExtra("Status", "on");
                 } else {
@@ -188,14 +189,14 @@ public class Device {
         }
     };
 
-    private View.OnClickListener SprniklerOnClick = new View.OnClickListener () {
+    private View.OnClickListener SprniklerOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            if(D) Log.e(TAG, "SprinklerBtn Click");
-            if(!StatusBtn.getBtnStatus()) {
-                if(D) Log.e(TAG, "SprinklerBtn Click"+ !StatusBtn.getBtnStatus());
+            if (D) Log.e(TAG, "SprinklerBtn Click");
+            if (!StatusBtn.getBtnStatus()) {
+                if (D) Log.e(TAG, "SprinklerBtn Click" + !StatusBtn.getBtnStatus());
                 SprinklerBtn.Display(!SprinklerBtn.getBtnStatus());
 
-                if(SprinklerBtn.getBtnStatus()) {
+                if (SprinklerBtn.getBtnStatus()) {
                     mPushIntent.putExtra("Item", "Sprinkler");
                     mPushIntent.putExtra("Status", "on");
                 } else {
