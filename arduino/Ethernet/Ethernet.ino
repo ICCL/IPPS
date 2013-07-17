@@ -8,7 +8,7 @@
   
   byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED}; // 乙太網路
   IPAddress ip(192, 168, 0, 30);                     // local IP
-  IPAddress remote(192, 168, 0, 128);                // remote IP
+  IPAddress remote(192, 168, 0, 108);                // remote IP
   EthernetServer Listen(80);                         // server
   EthernetClient client;                             // client
   
@@ -48,10 +48,10 @@
     Serial.println(Ethernet.localIP());
     
     /* default safe value*/
-    safe_Temperature = 26;
-    safe_Humidity    = 69;
-    safe_Soil        = 19;
-    safe_Light       = 299;
+    safe_Temperature = 30;
+    safe_Humidity    = 70;
+    safe_Soil        = 20;
+    safe_Light       = 100;
     Init_Safetys();
     SetController("Status", "Auto");
   }
@@ -74,7 +74,7 @@
   void EthernetSend() {
     Serial.print("time: ");
     Serial.println(time);
-    if(time == 60) { 
+    if(time == 1800) { 
       Deliver();
       time = 0;
     }
