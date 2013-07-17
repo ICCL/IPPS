@@ -73,9 +73,6 @@ public class Preferences {
         }
         mEditor.commit();
 //        if(D) Log.e(TAG, "Kind: "+ Kind +" Value: "+Value);
-
-        String url = Url + "/api/setSafetys/"+ Item +"/"+ Value;
-        new PullServer(url);
     }
 
     public Object getPreferences(int Kind) {
@@ -92,33 +89,6 @@ public class Preferences {
                 return spref.getString(Key_TEMPERATURE, "");
             default:
                 return "";
-        }
-    }
-
-    class PullServer implements Runnable {
-
-        private String result;
-        private String Url;
-
-        PullServer(String Url) {
-            this.Url = Url;
-            Thread mThread = new Thread(this);
-            mThread.start();
-        }
-
-        @Override
-        public void run() {
-            if (D) Log.e(TAG, "GetUrl: " + Url);
-            HttpGet httpGet = new HttpGet(Url);
-            try {
-                HttpResponse mHttpResponse = new DefaultHttpClient().execute(httpGet);
-                if (mHttpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                    result = EntityUtils.toString(mHttpResponse.getEntity());
-                    if (D) Log.e(TAG, "result " + result);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

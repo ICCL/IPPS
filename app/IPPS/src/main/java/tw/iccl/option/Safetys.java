@@ -10,8 +10,17 @@ import android.util.Log;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+
 import tw.iccl.ipps.R;
 
+import static tw.iccl.config.config.Url;
 import static tw.iccl.pullpush.PushService.BR_PUSH;
 
 /**
@@ -78,7 +87,8 @@ public class Safetys extends SherlockPreferenceActivity implements OnPreferenceC
         }
 
         UpdateValue();
-
+        String url = Url + "/api/setSafetys/"+ Key +"/"+ Value;
+        new PullServer(url);
         return true;
     }
 
@@ -97,6 +107,33 @@ public class Safetys extends SherlockPreferenceActivity implements OnPreferenceC
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    class PullServer implements Runnable {
+
+        private String result;
+        private String Url;
+
+        PullServer(String Url) {
+            this.Url = Url;
+            Thread mThread = new Thread(this);
+            mThread.start();
+        }
+
+        @Override
+        public void run() {
+            if (D) Log.e(TAG, "GetUrl: " + Url);
+            HttpGet httpGet = new HttpGet(Url);
+            try {
+                HttpResponse mHttpResponse = new DefaultHttpClient().execute(httpGet);
+                if (mHttpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                    result = EntityUtils.toString(mHttpResponse.getEntity());
+                    if (D) Log.e(TAG, "result " + result);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
